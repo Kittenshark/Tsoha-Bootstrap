@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="{{base_path}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        
+        <link href="{{base_path}}/assets/css/site.css" rel="stylesheet">
+        
+        
+        
+        <style>
+                    
+            ul#sidebar {
+                width: 70%;
+                margin: auto;
+            }
+
+            ul#sidebar li {
+                display: inline;
+            }
+
+            ul#sidebar li a {
+                display: block;
+                width: 65px;
+                background-color:#00CC33;
+                color:#008122;
+                padding: 20px 25px;
+                test-decoration: none;
+                border-radius: 6px 6px 6px 6px;
+                float:right;
+
+            }
+
+            ul#sidebar li a:hover {
+                background-color: white;
+            }
+            
+            a:link {
+                color:white; background-color:transparent; text-decoration:none
+            }
+            
+            #otsikko {
+                background-color:#008122;
+                color:white;
+                text-align:left;
+                padding:5px;
+            }
+            
+            #information {
+                height:100%;
+                width:100vh;
+                float:left;
+                padding:2vh;	
+            }
+            
+            #leftsidebar {
+                width:25vh;
+                height:100vh;
+                padding:5px;
+                float:left;
+                background-color:#008122;
+                text-align: center;
+            }
+            
+            #kirjautuminen {
+                float:right;
+                color:white;
+            }                 
+            
+            table, th, td {
+                table-layout: fixed;
+                border: 2vh;
+                border-spacing: 5vh;
+            }
+            
+            th, td {
+                height: 20vh;
+                border: 1px solid black;
+                
+                text-align: center;
+            }
+            #valikko {
+                height: 6vh;
+                width: 100%;
+                background-color: #00CC33;
+                color:black;
+            }
+            ul#upbar {
+                width: 70%;
+                margin: auto;
+                display: inline;
+            }
+            
+            ul#upbar li {
+                display: inline;
+            }
+            
+            ul#upbar li a {
+                display: block;
+                color:#008122;
+                padding: 10px 25px;
+                test-decoration: none;
+                float:left;
+            }
+
+        </style>
+    </head>
+    
+    <body>
+        <div id="otsikko">
+            
+            <div id="kirjautuminen">
+                <p>
+                    <a href="kirjaudu" class="btn btn-default">Kirjaudu ulos</a>   
+                </p>  
+                <p>
+                    <a href="kirjaudu" class="btn btn-default">Omat tiedot</a>
+                </p>
+            </div>
+            
+            <h1>Kukkakauppa</h1>
+            
+        </div>     
+        
+        
+        <div id="leftsidebar">
+        <h2>Menu</h2>
+
+        <ul id="sidebar">
+            <li><a href="#tuotteet"><b>Etusivu</b></a></li>
+            <li><a href="#alennukset"><b>Alennukset</b></a></li>
+            <li><a href="#info"><b>Yritysinfo</b></a></li>
+        </ul>
+        </div>
+        
+        <div id="valikko">
+            <ul id="upbar">
+                <li><a href="#A"><b>Tuotelista</b></a></li>
+                <li><a href="#B"><b>Asetelmat</b></a></li>
+                <li><a href="#C"><b>Kimput</b></a></li>
+                <li><a href="#D"><b>Kukat</b></a></li>
+            </ul>
+        </div>
+        
+	<div id="information">
+            <h2>Tuotelista</h2>
+            <table style="width:100vh">
+                <tr>
+                  <td>Tuote</td>
+                  <td>Tuote</td>		
+                  <td>Tuote</td>
+                  <td>Tuote</td>
+                </tr>
+                <tr>
+                  <td>Tuote</td>
+                  <td>Tuote</td>		
+                  <td>Tuote</td>
+                  <td>Tuote</td>
+                </tr>
+                <tr>
+                  <td>Tuote</td>
+                  <td>Tuote</td>		
+                  <td>Tuote</td>
+                  <td>Tuote</td>
+                </tr>
+              </table>
+        </div>
+
+        <script src="{{base_path}}/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="{{base_path}}/assets/js/site.js"></script>
+</body>
+</html>
