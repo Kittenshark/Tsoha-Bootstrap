@@ -30,7 +30,7 @@ require 'app/models/tuote.php';
     }
     
     public static function base2(){
-        View::make('suunnitelmat/base2.html');
+        View::make('homepage.html');
     }
     
     public static function muutaTuotetietoja(){
@@ -54,4 +54,16 @@ require 'app/models/tuote.php';
         View::make('tuotteet/uusituote.html');
     }
     
+    public static function store(){
+        $params = $_POST;
+        $tuote = new Tuote(array(
+            'fname' => $params['fname'],
+            'price' => $params['price'],
+            'description' => $params['description']
+        ));
+        
+        $tuote->save();
+        
+        Redirect::to('/tuotteet/' . $tuote->tid, array('message' => 'Uusi tuote on luotu'));
+    }
   }

@@ -50,12 +50,12 @@ class Tuote extends BaseModel{
     
     
     public static function save(){
-        $query = DB::connection()->prepare('INSERT INTO Tuote (nimi, hinta, alennus, kuvaus, varata, tilata) VALUES (:nimi, :hinta, :alennus, :kuvaus, :varata, :tilata) RETURNING id');      
-        $query->execute(array('nimi' => $this->nimi, 'hinta' => $this->hinta, 'alennus' => $this->alennus, 'kuvaus' => $this->kuvaus, 'varata' => $this->varata, 'tilata' => $this->tilata));
+        $query = DB::connection()->prepare('INSERT INTO Tuote (fname, price, sale, description, orderit, reserve) VALUES (:fname, :price, :sale, :description, :orderit, :reserve) RETURNING tid');      
+        $query->execute(array('fnimi' => $this->fnimi, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'orderit' => $this->orderit, 'reserve' => $this->reserve));
         
         $row = $query->fetch();
         
-        $this->id = $row['id'];
+        $this->tid = $row['tid'];
     }
 }
 

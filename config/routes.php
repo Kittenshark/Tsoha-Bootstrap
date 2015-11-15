@@ -36,6 +36,10 @@ $routes->get('/tuotteet', function(){
 TuoteController::index();
 });
 
-$routes->get('tuotteet/uusi', function(){
+$routes->get('/uusi', function(){
     HelloWorldController::uusi();
+});
+
+$routes->post('/tuotteet', function(){
+HelloWorldController::store();
 });
