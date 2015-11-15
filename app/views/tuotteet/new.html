@@ -1,0 +1,11 @@
+{%extends "base1.html" %}
+{% block content %}
+    
+    <h1>Tilaa tuote</h1>
+    
+    <form method="post" action="{{base1_path}}/tuotteet">
+        <div class="form-group">
+            <label>Nimi</label>
+            <input name="fname" class="form-control" type="text">
+        </div>
+

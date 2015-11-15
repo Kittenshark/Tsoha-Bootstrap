@@ -7,7 +7,7 @@ require 'app/models/tuote.php';
       // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
    	 echo 'Tämä on etusivu!';
     }
-*/
+
     public static function sandbox(){
         
         $tuotteet = Tuote::all();
@@ -16,7 +16,7 @@ require 'app/models/tuote.php';
 
     }
  
-   /* 
+  */
     public static function sandbox(){
         
         $tuotteet = Tuote::all();
@@ -24,8 +24,10 @@ require 'app/models/tuote.php';
         View::make('tuotteet/index.html', array('tuotteet' => $tuotteet));
 
     }
-    * 
-    */
+   
+    public static function takapajula(){
+        View::make('tuotteet/takapajula.html');
+    }
     
     public static function base2(){
         View::make('suunnitelmat/base2.html');
@@ -40,7 +42,16 @@ require 'app/models/tuote.php';
     }
     
     public static function tuotelista(){
-        View::make('suunnitelmat/tuotelista.html');
+        $tuotteet = Tuote::all();
+        View::make('tuotteet/tuotelista.html', array('tuotteet' => $tuotteet));
+    }
+    
+    public static function show(){
+        
+    }
+    
+    public static function uusi(){
+        View::make('tuotteet/uusituote.html');
     }
     
   }

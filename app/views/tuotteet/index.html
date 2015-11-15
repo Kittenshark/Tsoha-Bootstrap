@@ -1,51 +1,25 @@
-<!DOCTYPE html>
+{% extends "base1.html" %}
 
-<html>
-    {% extends "base.html" %}
-    {% block content %}
-    <h1>Kukkakauppa</h1>
-    
-    <p>
-        <a href="{{base_path}}/tuotteet/new" class="btn btn-success">Lisää tuote</a>
-    </p>
-    
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Nimi</th>
-                <th>Hinta</th>
-                <th>Alennus</th>
-                <th>Kuvaus</th>
-                <th>varata</th>
-                <th>tilata</th>
-                <th></th>
-            </tr>
-        </thead>
-        
-        <tbody>
-            {% for tuotteet in tuotteet %}
-            <tr>
-                <td><a href="{{base_path}}/tuotteet/{{tuote.id}}">{{tuote.nimi}}</td>
-                <td>{{tuote.hinta}}</td>
-                <td>{{tuote.alennus}}</td>
-                <td>{{kuvaus}}</td>
-                <td>
-                    {% if tuote.varata %}
-                    <label class="label label-success">kyllä
-                    {% else %}
-                    <label class="label-danger">ei
-                    {% endif %}      
-                </td>
-                <td>
-                    {% if tuote.tilata %}
-                    <label class="label label-success">kyllä
-                    {% else %}
-                    <label class="label-danger">ei
-                    {% endif %}
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    {% endblock %}
-    
-</html>
+{% block content %}
+     <h2>Tuotelista</h2>
+            <table style="width:100vh">
+                <tr>
+                  <td>Tuote</td>
+                  <td>Tuote</td>		
+                  <td>Tuote</td>
+                  <td>Tuote</td>
+                </tr>
+                <tr>
+                  <td>Tuote</td>
+                  <td>Tuote</td>		
+                  <td>Tuote</td>
+                  <td>Tuote</td>
+                </tr>
+                <tr>
+                  <td>Tuote</td>
+                  <td>Tuote</td>		
+                  <td>Tuote</td>
+                  <td>Tuote</td>
+                </tr>
+              </table>
+{% endblock %}

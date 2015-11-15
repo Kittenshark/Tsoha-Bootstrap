@@ -20,36 +20,146 @@
             <link href="{{base1_path}}/assets/css/site.css" rel="stylesheet">
         {% endblock %}
         
+        <style>
+                    
+            ul#sidebar {
+                width: 70%;
+                margin: auto;
+            }
+
+            ul#sidebar li {
+                display: inline;
+            }
+
+            ul#sidebar li a {
+                display: block;
+                width: 65px;
+                background-color:#00CC33;
+                color:#008122;
+                padding: 20px 25px;
+                test-decoration: none;
+                border-radius: 6px 6px 6px 6px;
+                float:right;
+
+            }
+
+            ul#sidebar li a:hover {
+                background-color: white;
+            }
+            
+            a:link {
+                color:white; background-color:transparent; text-decoration:none
+            }
+            
+            #otsikko {
+                background-color:#008122;
+                color:white;
+                text-align:left;
+                padding:5px;
+            }
+            
+            #information {
+                height:100%;
+                width:100vh;
+                float:left;
+                padding:2vh;	
+            }
+            
+            #leftsidebar {
+                width:25vh;
+                height:100vh;
+                padding:5px;
+                float:left;
+                background-color:#008122;
+                text-align: center;
+            }
+            
+            #kirjautuminen {
+                float:right;
+                color:white;
+            }                 
+            
+            
+            table, th, td {
+                table-layout: fixed;
+                width: 10px;
+            }
+            
+            th, td {
+                height: 20vh;
+                width: 10px;
+                border: 2px solid black;
+                
+                text-align: center;
+            }
+            
+            #valikko {
+                height: 6vh;
+                width: 100%;
+                background-color: #00CC33;
+                color:black;
+            }
+            ul#upbar {
+                width: 70%;
+                margin: auto;
+                display: inline;
+            }
+            
+            ul#upbar li {
+                display: inline;
+            }
+            
+            ul#upbar li a {
+                display: block;
+                color:#008122;
+                padding: 10px 25px;
+                test-decoration: none;
+                float:left;
+            }
+            
+            #tiedonMuutokset {
+                
+            }
+
+        </style>
     </head>
     
     <body>
         
-        <nav class="navbar navbar-default" role="navigation">
-          <div class="container-fluid">
-
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <!-- Sovelluksen nimi -->
-              <a class="navbar-brand" href="{{base1_path}}">Tsoha Bootstrap</a>
+        <div id="otsikko">
+            
+            <div id="kirjautuminen">
+                <p>
+                    <a href="kirjaudu" class="btn btn-default">Kirjaudu</a>
+                </p>  
             </div>
+            
+            <h1>Kukkakauppa</h1>
+            
+        </div>     
+        
+        
+        <div id="leftsidebar">
+        <h2>Menu</h2>
 
-            <div class="collapse navbar-collapse" id="navigation">
-              <ul class="nav navbar-nav">
-                <!-- Navigaation linkit -->
-                <li><a href="{{base1_path}}">Etusivu</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
-        <div id="main-container">
-          <!-- Dynaaminen sisältö tulee tähän -->
-          {% block content %}{% endblock %}
+        <ul id="sidebar">
+            <li><a href="#tuotteet"><b>Etusivu</b></a></li>
+            <li><a href="#alennukset"><b>Alennukset</b></a></li>
+            <li><a href="#info"><b>Yritysinfo</b></a></li>
+        </ul>
+        </div>
+        
+        <div id="valikko">
+            <ul id="upbar">
+                <li><a href="#A"><b>Tuotelista</b></a></li>
+                <li><a href="#B"><b>Asetelmat</b></a></li>
+                <li><a href="#C"><b>Kimput</b></a></li>
+                <li><a href="#D"><b>Kukat</b></a></li>
+            </ul>
+        </div>
+        
+        <div id="information">
+            {% block content %}{% endblock %}
         </div>
 
         {% block body %}
@@ -62,5 +172,6 @@
           <!-- Oma skriptitiedostomme -->
           <script src="{{base1_path}}/assets/js/site.js"></script>
         {% endblock %}
+        
     </body>
 </html>

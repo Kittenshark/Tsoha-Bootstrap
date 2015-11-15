@@ -1,7 +1,7 @@
 <?php
 
 class Tuote extends BaseModel{
-    public $id, $nimi, $hinta, $alennus, $kuvas, $varata, $tilata;
+    public $Tid, $fname, $price, $sale, $description, $orderIt, $reserve;
     
     public function __construct($attributes){
         parent::__construct($attributes);
@@ -16,37 +16,38 @@ class Tuote extends BaseModel{
         
         foreach ($rows as $row) {
             $tuotteet[] = new Tuote(array(
-                'id' => $row['id'],
-                'nimi' => $row['nimi'],
-                'hinta' => $row['hinta'],
-                'alennus' => $row['alennus'],
-                'kuvaus' => $row['kuvaus'],
-                'varata' => $row['varata'],
-                'tilata' => $row['tilata']
+                'tid' => $row['tid'],
+                'fname' => $row['fname'],
+                'price' => $row['price'],
+                'sale' => $row['sale'],
+                'descripotion' => $row['description'],
+                'orderit' => $row['orderit'],
+                'reserve' => $row['reserve']
             ));
         }
         return $tuotteet;
     }
     
     public static function find($id){
-        $query = DB::connection()->prepare('SELECT * FROM Tuote WHERE id =:id LIMIT 1');
-        $query->execute(array('id' => $id));
+        $query = DB::connection()->prepare('SELECT * FROM Tuote WHERE tid = :tid LIMIT 1');
+        $query->execute(array('tid' => $tid));
         $row = $query->fetch();
         
         if($row){
             $tuote = new Tuote(array(
-                'id' => $row['id'],
-                'nimi' => $row['nimi'],
-                'hinta' => $row['hinta'],
-                'alennus' => $row['alennus'],
-                'kuvaus' => $row['kuvaus'],
-                'varata' => $row['varata'],
-                'tilata' => $row['tilata']
+                'tid' => $row['tid'],
+                'fname' => $row['fname'],
+                'price' => $row['price'],
+                'sale' => $row['sale'],
+                'descripotion' => $row['description'],
+                'orderit' => $row['orderit'],
+                'reserve' => $row['reserve']
             ));
             return $tuote;
         }
         return null;
     }
+    
     
     public static function save(){
         $query = DB::connection()->prepare('INSERT INTO Tuote (nimi, hinta, alennus, kuvaus, varata, tilata) VALUES (:nimi, :hinta, :alennus, :kuvaus, :varata, :tilata) RETURNING id');      
@@ -57,6 +58,4 @@ class Tuote extends BaseModel{
         $this->id = $row['id'];
     }
 }
-
- $testi = new Tuote(array('id' => 1, 'nimi' => 'Tulppaani', 'alennus' => 0.00, 'kuvaus' => 'Uusi', 'varata' => false, 'tilata' => false));
 

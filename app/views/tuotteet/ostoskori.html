@@ -1,0 +1,21 @@
+{% extends "base1.html" %}
+
+{% block content %}
+    <h2>Tuotelista</h2>
+            <table style="width:100vh">
+                
+                 
+                {% for tuote in tuotteet %}
+
+                <tr>
+                    <td>
+                        <a href="{{base1_path}}/{{tuote.tid}}">{{tuote.fname}}</a>
+                            <p>{{tuote.price}}</p>
+                    </td>
+                </tr>
+                
+                {% endfor %}           
+              </table>
+    <h1>Lisää uusi tuote</h1>
+    
+{% endblock %}

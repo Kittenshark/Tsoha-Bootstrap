@@ -1,0 +1,35 @@
+{% extends "base1.html" %}
+
+{% block content %}
+    <h2>Tuotetiedot</h2>
+            <table style="width:40%">
+                <tr>
+                  <td>Tuotteen kuva</td>
+                </tr>
+            </table>
+            
+    <form method="post" action="{{base1_path}}/tuotteet">
+        <div class="formgroup">
+            <label>Nimi</label>
+            <input type="text" name="fname" />
+        </div>
+        
+        <div class="formgroup">
+            <label>Hinta</label>
+            <input type="text" name="price" />
+        </div>
+        
+        <div class="formgroup">
+            <label>Alennus</label>
+            <input type="text" name="sale" />
+        </div>
+        <div class="formgroup">
+            <label>Kuvaus</label>
+            <input type="text" name="description" />
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Tallenna</button>
+        </div>
+    </form>
+{% endblock %}
