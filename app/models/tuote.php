@@ -3,7 +3,7 @@
 class Tuote extends BaseModel{
     public $id, $nimi, $hinta, $alennus, $kuvas, $varata, $tilata;
     
-    public function _construct($attributes){
+    public function __construct($attributes){
         parent::__construct($attributes);
     }
     
