@@ -7,7 +7,6 @@ Yleisiä linkkejä:
 
 Linkkejä html suunnittelusivuille
 
-* [Etusivu](http://evkossi.users.cs.helsinki.fi/kukkia/base2)
 * [Tuotelista](http://evkossi.users.cs.helsinki.fi/kukkia/tuotelista)
 * [Tuotetiedot](http://evkossi.users.cs.helsinki.fi/kukkia/tuote)
 * [Muuta tuotteen tietoja](http://evkossi.users.cs.helsinki.fi/kukkia/muutaTuotetietoja)

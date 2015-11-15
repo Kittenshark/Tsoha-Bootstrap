@@ -1,14 +1,16 @@
 <?php
-
+/*
   $routes->get('/', function() {
     HelloWorldController::index();
   });
+*/
+  
 
   $routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
+      HelloWorldController::sandbox();
   });
   
-  $routes->get('/base2', function(){
+  $routes->get('/', function(){
       HelloWorldController::base2();
   });
   
@@ -16,10 +18,17 @@
       HelloWorldController::muutaTuotetietoja();
   });
   
+  
   $routes->get('/tuote', function(){
       HelloWorldController::tuote();
   });
   
+  
   $routes->get('/tuotelista', function(){
       HelloWorldController::tuotelista();
   });
+  
+
+$routes->get('/testisivu', function(){
+    TuoteController::index();
+});
