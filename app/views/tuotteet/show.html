@@ -1,0 +1,28 @@
+{% extends "base1.html" %}
+
+{% block content %}
+    <p><h3>Nimi</h3></p>
+    
+    <p>{{tuote.fname}}</p>
+    <div class="form-group">
+        <p><h3>Hinta</h3></p>
+        <p>{{tuote.price}}</p>
+    </div>
+     <div>
+        <p><h3>Alennus</h3></p>
+        <p>{{tuote.sale}}</p>
+    </div>
+    <div>    
+        <p><h3>Kuvaus</h3></p>
+        <p>{{tuote.description}}</p>
+    </div>                      
+    <div>
+        <button type="submit" class="btn btn-primary">Tilaa tuote</button>
+        <button type="submit" class="btn btn-primary">Varaa tuote</button>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Muokkaa tuotetta</button>
+    </div>
+
+                
+{% endblock %}

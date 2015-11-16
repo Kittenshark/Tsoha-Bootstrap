@@ -1,4 +1,3 @@
-
 <?php
 require 'app/models/tuote.php';
   class HelloWorldController extends BaseController{
@@ -18,27 +17,15 @@ require 'app/models/tuote.php';
  
   */
     public static function sandbox(){
-        
+        $ruusukimppu = Tuote::find(230);
         $tuotteet = Tuote::all();
         
-        View::make('tuotteet/index.html', array('tuotteet' => $tuotteet));
-
-    }
-   
-    public static function takapajula(){
-        View::make('tuotteet/takapajula.html');
+        Kint::dump($tuotteet);
+        Kint::dump($ruusukimppu);
     }
     
-    public static function base2(){
+    public static function home(){
         View::make('homepage.html');
-    }
-    
-    public static function muutaTuotetietoja(){
-        View::make('suunnitelmat/muutaTuotetietoja.html');
-    }
-    
-    public static function tuote(){
-        View::make('suunnitelmat/tuote.html');
     }
     
     public static function tuotelista(){
@@ -46,24 +33,28 @@ require 'app/models/tuote.php';
         View::make('tuotteet/tuotelista.html', array('tuotteet' => $tuotteet));
     }
     
-    public static function show(){
-        
-    }
-    
-    public static function uusi(){
-        View::make('tuotteet/uusituote.html');
-    }
-    
     public static function store(){
         $params = $_POST;
         $tuote = new Tuote(array(
             'fname' => $params['fname'],
             'price' => $params['price'],
+            'sale' => $params['sale'],
             'description' => $params['description']
         ));
         
+        Kint::dump($params);
+        
         $tuote->save();
         
-        Redirect::to('/tuotteet/' . $tuote->tid, array('message' => 'Uusi tuote on luotu'));
+        //Redirect::to('/tuotteet/' . $tuote->tid, array('message' => 'Uusi tuote on luotu'));
+    }
+    
+    public static function show($tid){
+        $tuote = Tuote::find($tid);
+        View::make('tuotteet/show.html', array('tuote' => $tuote));
+    }
+    
+    public static function uusi(){
+        View::make('tuotteet/uusituote.html');
     }
   }

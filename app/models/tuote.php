@@ -1,7 +1,7 @@
 <?php
 
 class Tuote extends BaseModel{
-    public $Tid, $fname, $price, $sale, $description, $orderIt, $reserve;
+    public $tid, $fname, $price, $sale, $description, $orderit, $reserve;
     
     public function __construct($attributes){
         parent::__construct($attributes);
@@ -28,7 +28,7 @@ class Tuote extends BaseModel{
         return $tuotteet;
     }
     
-    public static function find($id){
+    public static function find($tid){
         $query = DB::connection()->prepare('SELECT * FROM Tuote WHERE tid = :tid LIMIT 1');
         $query->execute(array('tid' => $tid));
         $row = $query->fetch();
@@ -39,7 +39,7 @@ class Tuote extends BaseModel{
                 'fname' => $row['fname'],
                 'price' => $row['price'],
                 'sale' => $row['sale'],
-                'descripotion' => $row['description'],
+                'description' => $row['description'],
                 'orderit' => $row['orderit'],
                 'reserve' => $row['reserve']
             ));
@@ -51,11 +51,13 @@ class Tuote extends BaseModel{
     
     public static function save(){
         $query = DB::connection()->prepare('INSERT INTO Tuote (fname, price, sale, description, orderit, reserve) VALUES (:fname, :price, :sale, :description, :orderit, :reserve) RETURNING tid');      
-        $query->execute(array('fnimi' => $this->fnimi, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'orderit' => $this->orderit, 'reserve' => $this->reserve));
+        $query->execute(array('fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'orderit' => $this->orderit, 'reserve' => $this->reserve));
         
         $row = $query->fetch();
+        Kint::trace();
+        Kint::dump($row);
         
-        $this->tid = $row['tid'];
+        //$this->tid = $row['tid'];
     }
 }
 
