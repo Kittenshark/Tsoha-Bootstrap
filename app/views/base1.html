@@ -128,11 +128,20 @@
         
         <div id="otsikko">
             
+            {% if user_logged_in %}
+            <div id ="kirjautuminen">
+                <p>
+                    <a href="#kayttaja" class="btn btn-default">Kayttajätiedot</a>
+                     <a href="#no" class="btn btn-default">Kirjaudu ulos</a>
+                </p>
+            </div>
+            {% else %}
             <div id="kirjautuminen">
                 <p>
-                    <a href="kirjaudu" class="btn btn-default">Kirjaudu</a>
+                    <a href="http://evkossi.users.cs.helsinki.fi/kukkia/kirjaudu" class="btn btn-default">Kirjaudu</a>
                 </p>  
             </div>
+            {% endif %}
             
             <h1>Kukkakauppa</h1>
             

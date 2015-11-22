@@ -1,5 +1,6 @@
 <?php
 require 'app/models/tuote.php';
+require 'app/models/kayttaja.php';
   class HelloWorldController extends BaseController{
 /*
     public static function index(){
@@ -98,4 +99,22 @@ require 'app/models/tuote.php';
         
         Redirect::to('/tuotteet', array('message' => 'Tuotteen poisto onnistui'));
     }
+    
+    public static function login(){
+            View::make('kirjaudu/kirjaudu.html');
+    }
+    
+    public static function handle_login(){
+            $params = $_POST;
+            
+            $kayttaja = Kayttaja::authenticate($params['username'], $params['password']);
+            
+            if (!$kayttaja){
+                View::make('kirjaudu/kirjaudu.html', array('error' => 'Väärä käyttäjätunnus tai salasana', 'username' => $params['username']));
+            } else{
+                $_SESSION['kayttaja'] = $kayttaja->userid;
+                
+                Redirect::to('/', array('message' => 'Tervetuloa' . $kayttaja->username));
+            }
+        }
   }

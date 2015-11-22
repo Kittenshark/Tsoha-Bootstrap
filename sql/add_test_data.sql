@@ -1,4 +1,4 @@
-INSERT INTO Kayttaja (userid, username, password, firstname, lasname, email) 
+INSERT INTO Kayttaja (userid, username, password, firstname, lastname, email) 
     VALUES ('1', 'Ei', '300ei', 'Muumi', 'Peikko', 'jaa@ei.com');
 
 INSERT INTO Tuoteryhma (id, fname, description) 

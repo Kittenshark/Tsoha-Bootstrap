@@ -20,6 +20,8 @@
         <button type="submit" class="btn btn-primary">Tilaa tuote</button>
         <button type="submit" class="btn btn-primary">Varaa tuote</button>
     </div>
+    
+    {% if user_logged_in %}
     <div>
         <a href="{{base1_path}}/kukkia/tuote/{{tuote.id}}/edit"><p>Muokkaa</p></a>
     </div>
@@ -28,5 +30,6 @@
             <button type="submit" class="btn btn-danger">Poista</button>
         </form>
     </div>
+    {% endif %}
                 
 {% endblock %}

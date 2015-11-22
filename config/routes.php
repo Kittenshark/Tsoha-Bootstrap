@@ -62,19 +62,24 @@ $routes->post('/tuote/:id/edit', function($id){
 $routes->post('/tuote/:id/remove', function($id){
     HelloWorldController::remove($id);
 });
-/*
+
+
+//sisäänkirjautuminen
+/* UserController ei löydy, korjaus myöhemmin
 $routes->get('/kirjaudu', function(){
-   TestiController::login();
+            UserController::login();        
+});
+
+$routes->post('/kirjaudu', function(){
+            UserController::handle_loging();        
 });
  * 
  */
 
-//sisäänkirjautuminen
-
-$routes->get('/login', function(){
-            UserController::login();        
+$routes->get('/kirjaudu', function(){
+    HelloWorldController::login();        
 });
 
-$routes->post('/login', function(){
-            UserController::handle_loging();        
+$routes->post('/kirjaudu', function(){
+    HelloWorldController::handle_login();        
 });

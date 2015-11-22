@@ -5,6 +5,7 @@
 			"lib",
 			"app/controllers",
                         "app/controllers/tuotteet_controller.php",
+                        "app/models/kayttaja.php",
                         "app/models/tuote.php"
 		]
 	},

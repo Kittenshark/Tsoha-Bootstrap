@@ -46,8 +46,9 @@ class Tuote extends BaseModel{
                 'groupid' => $row['groupid']
             ));
             return $tuote;
+        } else {
+           return null; 
         }
-        return null;
     }
     
     public function save(){
