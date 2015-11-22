@@ -14,44 +14,67 @@
       HelloWorldController::home();
   });
   
-  $routes->get('/muutaTuotetietoja', function(){
+  $routes->get('/muutaTietoja', function(){
       HelloWorldController::muutaTuotetietoja();
   });
   
-  /*
-  $routes->get('/tuote/:tid', function($tid){
-      HelloWorldController::show($tid);
-  });
-*/
-  $routes->get('/tuote', function(){
-      HelloWorldController::tuotelista();
-  });
-  
-  $routes->get('/tuote/:tid', function($tid){
-      HelloWorldController::show($tid);
-  });
+  $routes->post('/tuote', function(){
+    HelloWorldController::store();
+});
+
+$routes->get('/tuote/uusi', function(){
+    HelloWorldController::create();
+});
+
+//
+
+$routes->get('/tuote/:id', function($id){
+    HelloWorldController::show($id);
+});
 
 $routes->get('/testisivu', function(){
     TuoteController::index();
 });
 
-$routes->get('/tuotelista', function(){
+$routes->get('/tuotteet', function(){
     HelloWorldController::tuotelista();
 });
 
-$routes->get('/tuotteet', function(){
-TuoteController::index();
+
+//
+
+$routes->get('/tuotteet/kimputTuoteTest', function(){
+    TuoteController::kimput();
 });
 
-$routes->get('/uusi', function(){
-    HelloWorldController::uusi();
+$routes->get('/tuotteet/kimput', function(){
+    HelloWorldController::kimput();
 });
 
-$routes->post('/tuotteet', function(){
-HelloWorldController::store();
+$routes->get('/tuote/:id/edit', function($id){
+    HelloWorldController::edit($id);
 });
 
+$routes->post('/tuote/:id/edit', function($id){
+    HelloWorldController::update($id);
+});
 
+$routes->post('/tuote/:id/remove', function($id){
+    HelloWorldController::remove($id);
+});
+/*
 $routes->get('/kirjaudu', function(){
-   TestiController::login(); 
+   TestiController::login();
+});
+ * 
+ */
+
+//sisäänkirjautuminen
+
+$routes->get('/login', function(){
+            UserController::login();        
+});
+
+$routes->post('/login', function(){
+            UserController::handle_loging();        
 });

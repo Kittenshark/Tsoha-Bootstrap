@@ -25,5 +25,17 @@
 
       return $errors;
     }
+    
+    //validate metodeja
+    /*
+    public function validate_string_length($string, $length){
+        $errors = array();
+        if($this->fname == '' || $this->fname == null){
+            $errors[] = 'Nimi ei saa olla tyhjä';
+        }
+        if(fname)
+    }
+     * 
+     */
 
   }

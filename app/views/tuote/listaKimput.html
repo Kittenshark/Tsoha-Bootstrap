@@ -1,15 +1,17 @@
 {% extends "base1.html" %}
 
 {% block content %}
-    <h2>Tuotelista</h2>
+    <h2>Kimput</h2>
             <table style="width:100vh">
                 
                  
                 {% for tuote in tuotteet %}
-
+                {% if tuote.groupid.id == 2 %}
+                <p>{{tuote.fname}}</p>
+                {% endif %}
                 <tr>
                     <td>
-                        <a href="{{base1_path}}/kukkia/tuote/{{tuote.id}}">{{tuote.fname}}</a>
+                        <a href="{{base1_path}}/tuote/{{tuote.tid}}">{{tuote.fname}}</a>
                         <p>{{tuote.price}}</p>  
                     </td>
                 </tr>

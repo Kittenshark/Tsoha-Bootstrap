@@ -21,8 +21,12 @@
         <button type="submit" class="btn btn-primary">Varaa tuote</button>
     </div>
     <div>
-        <button type="submit" class="btn btn-primary">Muokkaa tuotetta</button>
+        <a href="{{base1_path}}/kukkia/tuote/{{tuote.id}}/edit"><p>Muokkaa</p></a>
     </div>
-
+    <div>
+        <form method="post" action="{{base1_path}}/kukkia/tuote/{{tuote.id}}/remove" style="display: inline-block;">
+            <button type="submit" class="btn btn-danger">Poista</button>
+        </form>
+    </div>
                 
 {% endblock %}

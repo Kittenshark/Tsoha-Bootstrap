@@ -1,27 +1,35 @@
 {% extends "base1.html" %}
+
 {% block content %}
-     <form method="post" action="{{base1_path}}/kukkia/tuote">
+     <form method="post" action="{{base1_path}}/kukkia/tuote/{{tuote.id}}/edit">
         <div class="form-group">
             <label>Nimi</label>
-            <input name="fname" class="form-control" type="text"/>
+            <p>{{tuote.fname}}</p>
+            <input type="text" name="fname" />
         </div>
         
         <div class="form-group">
             <label>Hinta</label>
-            <input type="text" name="price" class="form-control"/>
+            <p>{{price}}</p>
+            <input type="text" name="price" />
         </div>
         
         <div class="form-group">
             <label>Alennus</label>
-            <input type="text" name="sale" class="form-control"/>
+            <p>{{tuote.sale}}</p>
+            <input type="text" name="sale" />
         </div>
         <div class="form-group">
             <label>Kuvaus</label>
-            <input type="text" name="description" class="form-control"/>
+            <p>{{tuote.description}}</p>
+            <input type="text" name="description" />
         </div>
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Tallenna</button>
         </div>
     </form>
+<div><p>{{tuote.fname}}</p></div>
+<p>Testi</p>
+    
 {% endblock %}
