@@ -1,7 +1,6 @@
 CREATE TABLE Kayttaja(
-    userId SERIAL PRIMARY KEY,
-    username varchar(50),
-    --SERIAL PRIMARY KEY(username),
+    userid SERIAL PRIMARY KEY,
+    username varchar(50) NOT NULL,
     password varchar(50) NOT NULL,
     firstname varchar(50) NOT NULL,
     lasname varchar(50) NOT NULL,
@@ -15,13 +14,14 @@ CREATE TABLE Tuoteryhma(
 );
 
 CREATE TABLE Tuote(
-    tid SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     fname varchar(50) NOT NULL,
     price DECIMAL NOT NULL,
     sale DECIMAL,
     description varchar(200),
     orderIt boolean DEFAULT FALSE,
-    reserve boolean DEFAULT FALSE
+    reserve boolean DEFAULT FALSE,
+    groupid INTEGER REFERENCES Tuoteryhma(id)
 );
 
 CREATE TABLE Tilaus(
@@ -30,8 +30,8 @@ CREATE TABLE Tilaus(
     orderDay TIMESTAMP,
     arrivalAddress varchar(70),
     billingAddress varchar(70),
-    product_id INTEGER REFERENCES Tuote(tid),
-    orderer varchar(50) REFERENCES Kayttaja(username)
+    product_id INTEGER REFERENCES Tuote(id),
+    orderer INTEGER REFERENCES Kayttaja(userid)
 );
 
 CREATE TABLE Varaus(
@@ -40,7 +40,7 @@ CREATE TABLE Varaus(
     wayOfPayment varchar(50) NOT NULL,
     orderDay TIMESTAMP,
     collectDay TIMESTAMP,
-    product_id INTEGER REFERENCES Tuote(tid),
-    orderer varchar(50) REFERENCES Kayttaja(username)
+    product_id INTEGER REFERENCES Tuote(id),
+    orderer INTEGER REFERENCES Kayttaja(userid)
 );
     
