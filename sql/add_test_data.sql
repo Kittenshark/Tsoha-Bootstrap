@@ -1,6 +1,9 @@
 INSERT INTO Kayttaja (userid, username, password, firstname, lastname, email) 
     VALUES ('1', 'Ei', '300ei', 'Muumi', 'Peikko', 'jaa@ei.com');
 
+INSERT INTO Kayttaja (userid, username, password, firstname, lastname, email) 
+    VALUES ('2', 'Kayttaja', 'Salasana', 'Muumi', 'Peikko', 'jaa@ei.com');
+
 INSERT INTO Tuoteryhma (id, fname, description) 
     VALUES ('1', 'Viherkasvi', 'Multaan istutettu kasvi');
 

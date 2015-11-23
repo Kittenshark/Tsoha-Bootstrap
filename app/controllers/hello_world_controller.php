@@ -18,11 +18,16 @@ require 'app/models/kayttaja.php';
  
   */
     public static function sandbox(){
-        $ruusukimppu = Tuote::find(230);
-        $tuotteet = Tuote::all();
+        $ruusu = new Tuote(array(
+            'fname' => '',
+            'price' => '2',
+            'sale' => '0',
+            'description' => 'Punainen'
+        ));
         
-        Kint::dump($tuotteet);
-        Kint::dump($ruusukimppu);
+        $errors = $ruusu->errors();
+        
+        Kint::dump($errors);
     }
     
     public static function home(){
@@ -43,11 +48,15 @@ require 'app/models/kayttaja.php';
             'description' => $params['description']
         ));
         
-        //Kint::dump($params);
+        $errors = $tuote->errors();
         
-        $tuote->save();
-        
-        Redirect::to('/tuote/' . $tuote->id, array('message' => 'Uusi tuote on luotu'));
+        if(count($errors) == 0){
+             $tuote->save();
+             Redirect::to('/tuote/' . $tuote->id, array('message' => 'Uusi tuote on luotu'));
+        } else {
+            View::make('tuote/new.html', array('errors' => $errors));
+        }
+       
     }
     
     public static function create(){
@@ -93,6 +102,7 @@ require 'app/models/kayttaja.php';
         }
          * 
          */
+        //$tuote = Tuote::find($id);
         $tuote = Tuote::update($id);
         Redirect::to('/tuote/' . $id, array('message' => 'Muokkaus onnistui'));
         // Redirect::to('/tuote/' . $tuote->id, array('message' => 'Muokkaus onnistui'));
