@@ -70,6 +70,7 @@ require 'app/models/kayttaja.php';
     }
     
     public static function update($id){
+        /*
         $params = $_POST;
         
         $attributes = array(
@@ -80,8 +81,10 @@ require 'app/models/kayttaja.php';
                 );
         
         $tuote = new Tuote($attributes);
+         * 
+         */
         //$errors = $tuote->errors();
-        $tuote->update();
+        //$tuote->update();
         /*
         if(count($errors) > 0){
             View::make('tuote/edit.html', array('errors' => $errors, 'attributes' => $attributes));
@@ -90,12 +93,14 @@ require 'app/models/kayttaja.php';
         }
          * 
          */
-        Redirect::to('/tuote/' . $tuote->id, array('message' => 'Muokkaus onnistui'));
+        $tuote = Tuote::update($id);
+        Redirect::to('/tuote/' . $id, array('message' => 'Muokkaus onnistui'));
+        // Redirect::to('/tuote/' . $tuote->id, array('message' => 'Muokkaus onnistui'));
     }
     
     public static function remove($id){
-        $tuote = new Tuote(array('id' => $id));
-        $tuote -> remove();
+        //$tuote = new Tuote(array('id' => $id));
+        $tuote = Tuote::remove($id);
         
         Redirect::to('/tuotteet', array('message' => 'Tuotteen poisto onnistui'));
     }
