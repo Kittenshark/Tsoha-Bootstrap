@@ -5,6 +5,10 @@ Yleisiä linkkejä:
 * [Linkki sovellukseeni](http://evkossi.users.cs.helsinki.fi/kukkia/)
 * [Linkki dokumentaatiooni](https://github.com/Kittenshark/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
+Sovellukseen voi kirjautua seuraavilla tunnuksilla:
+    kayttaja: Kayttaja 
+    salasana: Salasana
+
 Linkkejä html suunnittelusivuille
 
 * [Tuotelista](http://evkossi.users.cs.helsinki.fi/kukkia/tuotelista)
