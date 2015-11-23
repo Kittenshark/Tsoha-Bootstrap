@@ -5,6 +5,7 @@ class Kayttaja extends BaseModel{
     
     public function __construct($attributes){
         parent::__construct($attributes);
+        $this->validators = array('validate_name', 'validate_password_length');
     }
    /* 
     public static function all(){
@@ -67,6 +68,27 @@ class Kayttaja extends BaseModel{
             return null;
         }   
     }
+    
+    public function validate_name(){
+        
+        $errors = array();
+        if($this->fname== '' || $this->fname== null){
+            $errors[] ='Nimi ei saa olla tyhjä';
+        }
+        return $errors; 
+         
+    }
+    
+    public function validate_password_length(){
+        
+        $errors = array();
+        if(strlen($this->password) < 3 || $this->password == null || $this->password == ''){
+            $errors[] ='Salasanan oltava vähintään 4 merkkiä';
+        }
+        return $errors; 
+         
+    }
+    
 }
     
     

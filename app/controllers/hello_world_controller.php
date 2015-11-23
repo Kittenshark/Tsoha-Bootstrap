@@ -104,7 +104,15 @@ require 'app/models/kayttaja.php';
          */
         //$tuote = Tuote::find($id);
         $tuote = Tuote::update($id);
-        Redirect::to('/tuote/' . $id, array('message' => 'Muokkaus onnistui'));
+        
+        $errors = $tuote->errors();
+        
+        if(count($errors) == 0){
+            Redirect::to('/tuote/' . $id, array('message' => 'Muokkaus onnistui'));
+        } else {
+            Redirect::to('/tuote/' . $id . '/edit', array('message' => 'Muokkaus ei onnistunut'));
+        } 
+        
         // Redirect::to('/tuote/' . $tuote->id, array('message' => 'Muokkaus onnistui'));
     }
     
