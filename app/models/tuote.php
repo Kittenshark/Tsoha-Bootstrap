@@ -4,9 +4,10 @@ class Tuote extends BaseModel{
     public $id, $fname, $price, $sale, $description, $orderit, $reserve;
     
     public function __construct($attributes){
-        parent::__construct($attributes);
+        parent::__construct($attributes);$attributes;
+        $this->validators = array('validate_name', 'validate_pricing_is_number');
     }
-    
+    //'validate_price', 'validate_sale', 'validate_description'
     public static function all(){
         $query = DB::connection()->prepare('SELECT * FROM Tuote');
         $query->execute();
@@ -89,12 +90,29 @@ class Tuote extends BaseModel{
     }
     
     public function remove($id){
-        //$query = DB::connection()->prepare('SELECT * FROM Tuote WHERE id = :id LIMIT 1');
         $query = DB::connection()->prepare('DELETE FROM Tuote WHERE id = :id');
         $query->execute(array('id' => $id));
-        //$query = "DELETE FROM Tuote WHERE id='$id'";
-        //$row = $query->fetch();
     }
     //$this->id
+    
+    public function validate_name(){
+        
+        $errors = array();
+        if($this->fname== '' || $this->fname== null){
+            $errors[] ='Nimi ei saa olla tyhjä';
+        }
+        return $errors; 
+         
+    }
+    
+    //validate price ja sale
+    public function validate_pricing_is_number(){
+        $errors = array();
+        if (!is_numeric($this->price) || (!is_numeric($this->sale))){
+            $errors[] ='Hinnan ja alennuksen oltava numeroita';
+        }
+        return $errors;
+    }
+     
 }
 
