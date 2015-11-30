@@ -108,9 +108,12 @@ class Kayttaja extends BaseModel{
     
     public function validate_email(){
         $errors = array();
-        if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+        if(filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+            
+        } else {
             $errors[] ='Sähköpostiosoite ei ole kunnollinen';
         }
+        return $errors;
     }
     
 }

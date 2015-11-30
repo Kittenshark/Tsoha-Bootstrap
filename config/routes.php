@@ -4,7 +4,12 @@
     HelloWorldController::index();
   });
 */
-  
+
+function check_logged_in(){
+    //Basecontroller::check_logged_in();
+    //jostain syystä löytää vain HelloWorldControllerin
+    HelloWorldController::check_logged_in();
+}
 
   $routes->get('/hiekkalaatikko', function() {
       HelloWorldController::sandbox();
@@ -16,14 +21,14 @@
   
   //tuotteisiin liittyviä polkuja
   
-  $routes->get('/muutaTietoja', function(){
+  $routes->get('/muutaTietoja', 'check_logged_in', function(){
       HelloWorldController::muutaTuotetietoja();
   });
   
-  $routes->post('/tuote', function(){
+  $routes->post('/tuote', 'check_logged_in', function(){
     HelloWorldController::store();
 });
-$routes->get('/tuote/uusi', function(){
+$routes->get('/tuote/uusi', 'check_logged_in', function(){
     HelloWorldController::create();
 });
 $routes->get('/tuote/:id', function($id){
@@ -49,15 +54,15 @@ $routes->get('/tuotteet/kimput', function(){
     HelloWorldController::kimput();
 });
 
-$routes->get('/tuote/:id/edit', function($id){
+$routes->get('/tuote/:id/edit', 'check_logged_in', function($id){
     HelloWorldController::edit($id);
 });
 
-$routes->post('/tuote/:id/edit', function($id){
+$routes->post('/tuote/:id/edit', 'check_logged_in', function($id){
     HelloWorldController::update($id);
 });
 
-$routes->post('/tuote/:id/remove', function($id){
+$routes->post('/tuote/:id/remove', 'check_logged_in', function($id){
     HelloWorldController::remove($id);
 });
 
@@ -91,15 +96,15 @@ $routes->get('/kayttaja/uusi', function(){
     //UserController::create();
     HelloWorldController::userCreate();
 });
-$routes->get('/kayttaja/:userid', function($userid){
+$routes->get('/kayttaja/:userid', 'check_logged_in', function($userid){
     //UserController::show($id);
     HelloWorldController::userShow($userid);
 });
 
-$routes->get('/kayttajat', function(){
+$routes->get('/kayttajat', 'check_logged_in', function(){
     HelloWorldController::kayttajalista(); 
 });
 
-$routes->post('/kayttaja/:userid/remove', function($userid){
+$routes->post('/kayttaja/:userid/remove', 'check_logged_in', function($userid){
     HelloWorldController::userRemove($userid);
 });

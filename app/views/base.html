@@ -158,6 +158,9 @@
             <li><a href="http://evkossi.users.cs.helsinki.fi/kukkia/"><b>Etusivu</b></a></li>
             <li><a href="#alennukset"><b>Alennukset</b></a></li>
             <li><a href="#info"><b>Yritysinfo</b></a></li>
+            {% if user_logged_in %}
+            <li><a href="{{base_path}}/kayttajat"><b>Käyttäjät</b></a></li>
+            {% endif %}
         </ul>
         </div>
         

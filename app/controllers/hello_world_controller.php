@@ -40,6 +40,7 @@ require 'app/models/kayttaja.php';
     }
     
     public static function store(){
+        self::check_logged_in();
         $params = $_POST;
         $tuote = new Tuote(array(
             'fname' => $params['fname'],
@@ -60,6 +61,7 @@ require 'app/models/kayttaja.php';
     }
     
     public static function create(){
+        self::check_logged_in();
         View::make('tuote/new.html');
     }
     
@@ -74,11 +76,13 @@ require 'app/models/kayttaja.php';
     }
     
     public static function edit($id){
+        self::check_logged_in();
         $tuote = Tuote::find($id);
         View::make('tuote/edit.html', array('attributes' => $tuote));
     }
     
     public static function update($id){
+        self::check_logged_in();
         /*
         $params = $_POST;
         
@@ -117,6 +121,7 @@ require 'app/models/kayttaja.php';
     }
     
     public static function remove($id){
+        self::check_logged_in();
         //$tuote = new Tuote(array('id' => $id));
         $tuote = Tuote::remove($id);
         
@@ -140,7 +145,13 @@ require 'app/models/kayttaja.php';
                 Redirect::to('/', array('message' => 'Tervetuloa' . $kayttaja->username));
             }
         }
-    
+        
+    public static function check_logged_in(){
+        if(!isset($_SESSION['kayttaja'])){
+            Redirect::to('/kirjaudu', array('message' => 'Kirjautuminen vaaditaan'));
+        }
+    }
+        
     public function logout(){
         $_SESSION['kayttaja'] = null;
         Redirect::to('/kirjaudu', array('message' => 'Uloskirjautuminen onnistui'));
@@ -148,6 +159,7 @@ require 'app/models/kayttaja.php';
         
     //luodaan uusi käyttäjä
     public static function userStore(){
+        self::check_logged_in();
         $params = $_POST;
         $kayttaja = new Kayttaja(array(
             'username' => $params['username'],
@@ -174,6 +186,7 @@ require 'app/models/kayttaja.php';
         }
         
         public static function userCreate(){
+            self::check_logged_in();
         View::make('kirjaudu/rekisterointi.html');
     }    
     
@@ -183,6 +196,7 @@ require 'app/models/kayttaja.php';
     }
     
     public static function userRemove($userid){
+        self::check_logged_in();
         $kayttaja = Kayttaja::remove($userid);
         
         Redirect::to('/kayttajat', array('message' => 'Käyttäjätunnus on poistettu'));
