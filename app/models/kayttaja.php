@@ -5,7 +5,7 @@ class Kayttaja extends BaseModel{
     
     public function __construct($attributes){
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_password_length');
+        $this->validators = array('validate_name', 'validate_password_length', 'validate_email');
     }
     
     //listataan kaikki käyttäjät
@@ -39,6 +39,11 @@ class Kayttaja extends BaseModel{
         //Kint::dump($row);
         
         $this->userid = $row['userid'];
+    }
+    
+    public function remove($userid){
+        $query = DB::connection()->prepare('DELETE FROM Kayttaja WHERE userid = :userid');
+        $query->execute(array('userid' => $userid));
     }
     
     public static function authenticate($username, $password){
@@ -99,6 +104,13 @@ class Kayttaja extends BaseModel{
         }
         return $errors; 
          
+    }
+    
+    public function validate_email(){
+        $errors = array();
+        if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+            $errors[] ='Sähköpostiosoite ei ole kunnollinen';
+        }
     }
     
 }

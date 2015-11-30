@@ -95,3 +95,11 @@ $routes->get('/kayttaja/:userid', function($userid){
     //UserController::show($id);
     HelloWorldController::userShow($userid);
 });
+
+$routes->get('/kayttajat', function(){
+    HelloWorldController::kayttajalista(); 
+});
+
+$routes->post('/kayttaja/:userid/remove', function($userid){
+    HelloWorldController::userRemove($userid);
+});

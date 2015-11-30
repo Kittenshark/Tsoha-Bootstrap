@@ -142,9 +142,9 @@ require 'app/models/kayttaja.php';
         }
     
     public function logout(){
-        $_SESSION['user'] = null;
+        $_SESSION['kayttaja'] = null;
         Redirect::to('/kirjaudu', array('message' => 'Uloskirjautuminen onnistui'));
-        }    
+    }    
         
     //luodaan uusi käyttäjä
     public static function userStore(){
@@ -158,6 +158,7 @@ require 'app/models/kayttaja.php';
         ));
         
         $kayttaja->save();
+        $_SESSION['kayttaja'] = $kayttaja->userid;
         Redirect::to('/kayttaja/' . $kayttaja->userid, array('message' => 'Uusi käyttäjätunnus on luotu'));
         //$errors = $kayttaja->errors();
         
@@ -179,5 +180,16 @@ require 'app/models/kayttaja.php';
     public static function userShow($userid){
         $kayttaja = Kayttaja::find($userid);
         View::make('kirjaudu/kayttaja.html', array('kayttaja' => $kayttaja));
+    }
+    
+    public static function userRemove($userid){
+        $kayttaja = Kayttaja::remove($userid);
+        
+        Redirect::to('/kayttajat', array('message' => 'Käyttäjätunnus on poistettu'));
+    }
+    
+    public static function kayttajalista(){
+        $kayttajat = Kayttaja::all();
+        View::make('kirjaudu/kayttajalista.html', array('kayttajat' => $kayttajat));
     }
   }

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Tuotelista</h2>
+
+    <table style="width:100%">
+        <tr>
+            <th>Käyttäjätunnus</th>
+            <th>Sähköpostiosoite</th>
+            <th>poista</th>
+        </tr>
+         {% for kayttaja in kayttajat %}
+        <tr>
+            <td>{{kayttaja.username}}</td>
+            <td>{{kayttaja.email}}</td>
+            <td>
+                <div>
+                    <form method="post" action="{{base_path}}/kayttaja/{{kayttaja.userid}}/remove" style="display: inline-block;">
+                    <button type="submit" class="btn btn-danger">Poista</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    
+{% endblock %}
