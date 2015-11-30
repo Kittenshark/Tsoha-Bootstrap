@@ -5,7 +5,7 @@ class Kayttaja extends BaseModel{
     
     public function __construct($attributes){
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_password_length', 'validate_email');
+        $this->validators = array('validate_name', 'validate_password_length', 'validate_email', 'validate_username_not_taken', 'validate_real_name');
     }
     
     //listataan kaikki käyttäjät
@@ -86,18 +86,63 @@ class Kayttaja extends BaseModel{
         }   
     }
     
-    public function validate_name(){
+    public static function findUsername($username){
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE username = :username');
+        $query->execute(array('username' => $username));
+        $row = $query->fetch();
         
+        if($row){
+            $kayttaja = new Kayttaja(array(
+                'userid' => $row['userid'],
+                'username' => $row['username'],
+                'password' => $row['password'],
+                'firstname' => $row['firstname'],
+                'lastname' => $row['lastname'],
+                'email' => $row['email']
+            ));
+            return true;
+        } else {
+            return false;
+        }   
+    }
+    
+    public function validate_name(){
+        /*
         $errors = array();
-        if($this->fname== '' || $this->fname== null){
-            $errors[] ='Nimi ei saa olla tyhjä';
+        $errors = $this->check_empty($this->username, $errors);
+        /*
+        BaseModel::string_not_null();
+*/
+        $errors = array();
+        if($this->username== '' || $this->username== null){
+            $errors[] ='Käyttäjätunnus puuttuu';
         }
         return $errors; 
          
     }
     
-    public function validate_password_length(){
+    public function validate_real_name(){
+        $errors = array();
+        if($this->firstname== '' || $this->firstname== null){
+            $errors[] ='Nimi puuttuu';
+        }
+        //$errors = $this->check_empty($this->firstname, $errors);
+        //$this->check_empty($this->lastname, $errors);
         
+        return $errors;
+    }
+    /*
+    public function check_empty($param, $errors){
+        if($param == '' || $param == null){
+            $errors[] ='Jotakin puuttuu';
+            //tarkennus mitä puuttuu tulossa
+        }
+        return $errors;
+    }
+    
+     * 
+     */
+    public function validate_password_length(){
         $errors = array();
         if(strlen($this->password) < 3 || $this->password == null || $this->password == ''){
             $errors[] ='Salasanan oltava vähintään 4 merkkiä';
@@ -108,10 +153,16 @@ class Kayttaja extends BaseModel{
     
     public function validate_email(){
         $errors = array();
-        if(filter_var($this->email, FILTER_VALIDATE_EMAIL)){
-            
-        } else {
+        if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
             $errors[] ='Sähköpostiosoite ei ole kunnollinen';
+        }
+        return $errors;
+    }
+    
+    public function validate_username_not_taken(){
+        $errors = array();
+        if($this->findUsername($this->username)){
+            $errors[] ='Käyttäjätunnus on varattu';
         }
         return $errors;
     }
