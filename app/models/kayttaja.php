@@ -7,16 +7,17 @@ class Kayttaja extends BaseModel{
         parent::__construct($attributes);
         $this->validators = array('validate_name', 'validate_password_length');
     }
-   /* 
+    
+    //listataan kaikki käyttäjät
     public static function all(){
-        $query = DB::connection()->prepare('SELECT * FROM Tuote');
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja');
         $query->execute();
         
         $rows = $query->fetchAll();
         $kayttajat = array();
         
         foreach ($rows as $row) {
-            $kayttajat[] = new Tuote(array(
+            $kayttajat[] = new Kayttaja(array(
                 'userid' => $row['userid'],
                 'username' => $row['username'],
                 'password' => $row['password'],
@@ -27,8 +28,19 @@ class Kayttaja extends BaseModel{
         }
         return $kayttajat;
     }
-    * 
-    */
+    
+    //luodaan uusi käyttäjä
+    public function save(){
+        $query = DB::connection()->prepare('INSERT INTO Kayttaja (username, password, firstname, lastname, email) VALUES (:username, :password, :firstname, :lastname, :email) RETURNING userid');      
+        $query->execute(array('username' => $this->username, 'password' => $this->password, 'firstname' => $this->firstname, 'lastname' => $this->lastname, 'email' => $this->email));
+        $row = $query->fetch();
+        
+        //Kint::trace();
+        //Kint::dump($row);
+        
+        $this->userid = $row['userid'];
+    }
+    
     public static function authenticate($username, $password){
         $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE username = :username AND password = :password LIMIT 1');
         $query->execute(array('username' => $username, 'password' => $password));

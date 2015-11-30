@@ -1,9 +1,9 @@
-{% extends "base1.html" %}
+{% extends "base.html" %}
 
 {% block content %}
     <h1>Kirjaudu sisään</h1>
     
-    <form method="POST" action="{{base1_path}}/kukkia/kirjaudu">
+    <form method="POST" action="{{base_path}}/kirjaudu">
         <div class="form-group">
             <label>Käyttäjätunnus</label>
             <input class="form-control" name="username" value="{{usename}}" type="text">
@@ -14,4 +14,6 @@
         </div>
         <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
     </form>
+    
+    <a href="http://evkossi.users.cs.helsinki.fi/kukkia/kayttaja/uusi" class="btn btn-default">Rekisteröidy</a>
 {% endblock %}

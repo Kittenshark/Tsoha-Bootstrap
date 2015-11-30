@@ -1,4 +1,4 @@
-{% extends "base1.html" %}
+{% extends "base.html" %}
 
 {% block content %}
     <p><h3>Nimi</h3></p>
@@ -23,10 +23,10 @@
     
     {% if user_logged_in %}
     <div>
-        <a href="{{base1_path}}/kukkia/tuote/{{tuote.id}}/edit"><p>Muokkaa</p></a>
+        <a href="{{base_path}}/tuote/{{tuote.id}}/edit"><p>Muokkaa</p></a>
     </div>
     <div>
-        <form method="post" action="{{base1_path}}/kukkia/tuote/{{tuote.id}}/remove" style="display: inline-block;">
+        <form method="post" action="{{base_path}}/tuote/{{tuote.id}}/remove" style="display: inline-block;">
             <button type="submit" class="btn btn-danger">Poista</button>
         </form>
     </div>

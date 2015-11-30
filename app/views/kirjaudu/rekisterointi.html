@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>Käyttäjätiedot</h1>
+    
+    {% if errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for error in errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
+     <form method="post" action="{{base_path}}/kayttaja">
+        <div class="form-group">
+            <label>Käyttäjätunnus</label>
+            <input name="username" class="form-control" type="text"/>
+        </div>
+        
+        <div class="form-group">
+            <label>Salasana</label>
+            <input type="text" name="password" class="form-control"/>
+        </div>
+        
+        <div class="form-group">
+            <label>Etunimi</label>
+            <input type="text" name="firstname" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Sukunimi</label>
+            <input type="text" name="lastname" class="form-control"/>
+        </div>
+         
+         <div class="form-group">
+            <label>Sähköposti</label>
+            <input type="text" name="email" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Luo tunnus</button>
+        </div>
+    </form>
+{% endblock %}

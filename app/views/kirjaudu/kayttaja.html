@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <p><h3>Käyttäjätiedot</h3></p>
+    
+    <div class="form-group">
+        <p><h3>Käyttäjätunnus</h3></p>
+        <p>{{kayttaja.username}}</p>
+    </div>
+     <div>
+        <p><h3>Nimi</h3></p>
+        <p>{{kayttaja.firstname}} {{kayttaja.lastname}}</p>
+    </div>
+    <div>    
+        <p><h3>Sähköposti</h3></p>
+        <p>{{kayttaja.email}}</p>
+    </div>                      
+    
+    <div>
+        <a href="#"><p>Tilaukset</p></a>
+        <a href="#"><p>Varaukset</p></a>
+    </div>
+
+              
+{% endblock %}

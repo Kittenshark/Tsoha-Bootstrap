@@ -140,4 +140,44 @@ require 'app/models/kayttaja.php';
                 Redirect::to('/', array('message' => 'Tervetuloa' . $kayttaja->username));
             }
         }
+    
+    public function logout(){
+        $_SESSION['user'] = null;
+        Redirect::to('/kirjaudu', array('message' => 'Uloskirjautuminen onnistui'));
+        }    
+        
+    //luodaan uusi käyttäjä
+    public static function userStore(){
+        $params = $_POST;
+        $kayttaja = new Kayttaja(array(
+            'username' => $params['username'],
+            'password' => $params['password'],
+            'firstname' => $params['firstname'],
+            'lastname' => $params['lastname'],
+            'email' => $params['email']
+        ));
+        
+        $kayttaja->save();
+        Redirect::to('/kayttaja/' . $kayttaja->userid, array('message' => 'Uusi käyttäjätunnus on luotu'));
+        //$errors = $kayttaja->errors();
+        
+        /*
+        if(count($errors) == 0){
+             $kayttaja->save();
+             Redirect::to('/kayttaja/' . $kayttaja->userid, array('message' => 'Uusi käyttäjätunnus on luotu'));
+        } else {
+            View::make('kirjaudu/rekisterointi.html', array('errors' => $errors));
+        }
+         * 
+         */
+        }
+        
+        public static function userCreate(){
+        View::make('kirjaudu/rekisterointi.html');
+    }    
+    
+    public static function userShow($userid){
+        $kayttaja = Kayttaja::find($userid);
+        View::make('kirjaudu/kayttaja.html', array('kayttaja' => $kayttaja));
+    }
   }

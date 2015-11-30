@@ -17,6 +17,7 @@
 
     public function errors(){
       // Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona
+        /*
       $errors = array();
 
       foreach($this->validators as $validator){
@@ -33,6 +34,8 @@
             $errors[] ='Merkkijono ei saa olla tyhjä';
         }
         return $errors; 
+         * 
+         */
     }
     
     //validate metodeja

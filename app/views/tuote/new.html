@@ -1,4 +1,4 @@
-{% extends "base1.html" %}
+{% extends "base.html" %}
 {% block content %}
 
     <h1>Lisää uusi tuote</h1>
@@ -13,7 +13,7 @@
     </div>
     {% endif %}
     
-     <form method="post" action="{{base1_path}}/kukkia/tuote">
+     <form method="post" action="{{base_path}}/tuote">
         <div class="form-group">
             <label>Nimi</label>
             <input name="fname" class="form-control" type="text"/>
