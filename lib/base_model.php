@@ -27,7 +27,7 @@
 
       return $errors;
     }
-    
+    /*
     public function string_not_null(){
         $errors = array();
         if($this->name== '' || $this->name== null){
@@ -36,6 +36,8 @@
         return $errors; 
          
     }
+     * 
+     */
     
     //validate metodeja
 
