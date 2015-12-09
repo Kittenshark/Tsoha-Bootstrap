@@ -57,6 +57,7 @@ class TuoteController extends BaseController{
         $params = $_POST;
         
         $attributes = array(
+            'id' => $id,
             'fname' => $params['fname'],
             'price' => $params['price'],
             'sale' => $params['sale'],

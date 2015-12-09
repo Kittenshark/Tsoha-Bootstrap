@@ -16,9 +16,6 @@ $routes->get('/', function(){
 });
     
 //tuotteisiin liittyviä toimintoja
-$routes->get('/muutaTietoja', 'check_logged_in', function(){
-    TuoteController::muutaTuotetietoja();
-});  
 $routes->post('/tuote', 'check_logged_in', function(){
     TuoteController::store();
 });
