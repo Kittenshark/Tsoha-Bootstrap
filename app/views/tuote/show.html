@@ -21,12 +21,12 @@
         {% if tuote.orderit %}
          <a href="{{base_path}}/tuotteet/{{tuote.id}}/tilaa" class="btn btn-success">Tilaa tuote</a>
         {% else %}
-        <button type="submit" class="btn btn-primary disabled">Tilaa tuote</button>
+        <button class="btn btn-danger disabled">Tilaa tuote</button>
         {% endif %}
         {% if tuote.reserve %}
         <button type="submit" class="btn btn-primary active">Varaa tuote</button>
         {% else %}
-        <button type="submit" class="btn btn-primary disabled">Varaa tuote</button>
+        <button class="btn btn-danger disabled">Varaa tuote</button>
         {% endif %}
     </div>  
     <div>

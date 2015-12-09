@@ -15,7 +15,9 @@ class TuoteController extends BaseController{
             'price' => $params['price'],
             'sale' => $params['sale'],
             'description' => $params['description'],
-            'groupid' => $params['groupid']
+            'groupid' => $params['groupid'],
+            'orderit' => $params['orderit'],
+            'reserve' => $params['reserve']
         ));
         
         $errors = $tuote->errors();
@@ -61,7 +63,9 @@ class TuoteController extends BaseController{
             'fname' => $params['fname'],
             'price' => $params['price'],
             'sale' => $params['sale'],
-            'description' => $params['description']
+            'description' => $params['description'],
+            'orderit' => $params['orderit'],
+            'reserve' => $params['reserve']
                 );
         
         $tuote = new Tuote($attributes);
@@ -73,23 +77,6 @@ class TuoteController extends BaseController{
             $tuote->update();
             Redirect::to('/tuote/' . $tuote->id, array('message' => 'Onnistunut muokkaus') );
         }
-         
-        
-        //$tuote = Tuote::find($id);
-        /*
-        $tuote = Tuote::update($id);
-        
-        $errors = $tuote->errors();
-        
-        if(count($errors) == 0){
-            Redirect::to('/tuote/' . $id, array('message' => 'Muokkaus onnistui'));
-        } else {
-            Redirect::to('/tuote/' . $id . '/edit', array('message' => 'Muokkaus ei onnistunut'));
-        } 
-        
-        // Redirect::to('/tuote/' . $tuote->id, array('message' => 'Muokkaus onnistui'));
-         * 
-         */
     }
     
     public static function remove($id){

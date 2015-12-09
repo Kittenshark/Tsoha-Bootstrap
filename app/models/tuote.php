@@ -53,8 +53,8 @@ class Tuote extends BaseModel{
     }
     
     public function save(){
-        $query = DB::connection()->prepare('INSERT INTO Tuote (fname, price, sale, description, groupid) VALUES (:fname, :price, :sale, :description, :groupid) RETURNING id');      
-        $query->execute(array('fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'groupid' => $this->groupid));
+        $query = DB::connection()->prepare('INSERT INTO Tuote (fname, price, sale, description, groupid, orderit, reserve) VALUES (:fname, :price, :sale, :description, :groupid, :orderit, :reserve) RETURNING id');      
+        $query->execute(array('fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'groupid' => $this->groupid, 'orderit' => $this->orderit, 'reserve' => $this->reserve));
         $row = $query->fetch();
         
         //Kint::trace();
@@ -83,8 +83,8 @@ class Tuote extends BaseModel{
         //$query = DB::connection()->prepare('UPDATE Tuote SET (fname, price, sale, description) = (:fname, :price, :sale, :description) WHERE id = :id');
         //$query->execute(array('id' => $this->id, 'fname' => $fname, 'price' => $price, 'sale' => $sale, 'description' => $description));
         
-        $query = DB::connection()->prepare('UPDATE Tuote SET fname = :fname, price = :price, sale = :sale, description = :description WHERE id = :id');
-        $query->execute(array('id' => $this->id, 'fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description));
+        $query = DB::connection()->prepare('UPDATE Tuote SET fname = :fname, price = :price, sale = :sale, description = :description, orderit = :orderit, reserve = :reserve WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'orderit' => $this->orderit, 'reserve' => $this->reserve));
         
         //Kint::dump($row);
     }

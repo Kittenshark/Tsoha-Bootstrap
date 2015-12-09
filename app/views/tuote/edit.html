@@ -24,19 +24,20 @@
             <p>Nykyinen kuvaus: <b>{{tuote.description}}</b></p>
             <input type="text" name="description" />
         </div>  
-    </form>
         <div>
              <label>Tuotetta voi tilata</label>
-             <input type="radio" name="orderit" value="YES" >Kyllä
-             <input type="radio" name="orderit" value="NO" checked> Ei
+             <input type="radio" name="orderit" value="true" >Kyllä
+             <input type="radio" name="orderit" value="false" checked> Ei
         </div>
         <div>
              <label>Tuotetta voi varata myymälästä</label>
-             <input type="radio" name="reserve" value="YES" >Kyllä
-             <input type="radio" name="reserve" value="NO" checked> Ei
+             <input type="radio" name="reserve" value="true" >Kyllä
+             <input type="radio" name="reserve" value="false" checked> Ei
          </div>
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Tallenna</button>
-        </div>
+        </div> 
+    </form>
+        
 {% endblock %}
