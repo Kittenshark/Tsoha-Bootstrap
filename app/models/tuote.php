@@ -9,7 +9,7 @@ class Tuote extends BaseModel{
     }
     //'validate_price', 'validate_sale', 'validate_description'
     public static function all(){
-        $query = DB::connection()->prepare('SELECT * FROM Tuote');
+        $query = DB::connection()->prepare('SELECT * FROM Tuote ORDER BY fname');
         $query->execute();
         
         $rows = $query->fetchAll();

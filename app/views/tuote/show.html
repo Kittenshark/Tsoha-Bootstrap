@@ -8,10 +8,12 @@
         <p><h3>Hinta</h3></p>
         <p>{{tuote.price}}</p>
     </div>
-     <div>
-        <p><h3>Alennus</h3></p>
-        <p>{{tuote.sale}}</p>
+    {% if tuote.sale > 0 %}
+     <div id="alennus">
+        <p><h3>Alennuksessa!</h3></p>
+        <p>-{{tuote.sale}} %</p>
     </div>
+    {% endif %}
     <div>    
         <p><h3>Kuvaus</h3></p>
         <p>{{tuote.description}}</p>

@@ -14,6 +14,11 @@
                     <td>
                         <a href="{{base_path}}/tuote/{{tuote.id}}">{{tuote.fname}}</a>
                         <p>{{tuote.price}}</p>
+                        {% if tuote.sale > 0 %}
+                        <div id="alennus">
+                            <p>Alennuksessa -{{tuote.sale}}%!</p>
+                        </div>
+                        {% endif %}
                     </td>
                 </tr>
                 

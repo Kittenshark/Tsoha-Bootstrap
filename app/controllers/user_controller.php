@@ -71,6 +71,7 @@ require 'app/models/kayttaja.php';
     }    
     
     public static function userShow($userid){
+        self::check_logged_in();
         $kayttaja = Kayttaja::find($userid);
         View::make('kirjaudu/kayttaja.html', array('kayttaja' => $kayttaja));
     }

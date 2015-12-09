@@ -11,7 +11,7 @@
         </tr>
          {% for kayttaja in kayttajat %}
         <tr>
-            <td>{{kayttaja.username}}</td>
+            <td><a href="{{base_path}}/kayttaja/{{kayttaja.userid}}">{{kayttaja.username}}</a></td>
             <td>{{kayttaja.email}}</td>
             <td>
                 <div>
