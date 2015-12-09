@@ -8,7 +8,7 @@ class Tilaus extends BaseModel{
     }
     
     public static function find($orderId){
-        $query = DB::connection()->prepare('SELECT * FROM TIlaus WHERE orderId = :orderId LIMIT 1');
+        $query = DB::connection()->prepare('SELECT * FROM Tilaus WHERE orderId = :orderId LIMIT 1');
         $query->execute(array('orderId' => $orderId));
         $row = $query->fetch();
         
@@ -40,10 +40,10 @@ class Tilaus extends BaseModel{
     }
     
     public function countPrice(){
-        $query = DB::connection()->prepare('SELECT * FROM Tilaus INNER JOIN TUOTE ON product_id = id');
+        $query = DB::connection()->prepare('SELECT * FROM Tilaus INNER JOIN TUOTE ON tuote.id = $this->product_id');
         $query->execute();
         $rows = $query->fetchAll();
         
-        $this->price = Tuote::price;
+        //$this->price = Tuote::price;
     }
 }
