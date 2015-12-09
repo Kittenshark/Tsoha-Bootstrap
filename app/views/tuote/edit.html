@@ -4,24 +4,24 @@
      <form method="post" action="{{base_path}}/tuote/{{tuote.id}}/edit">
         <div class="form-group">
             <label>Nimi</label>
-            <p>{{tuote.fname}}</p>
+            <p>Nykyinen nimi: <b>{{tuote.fname}}</b></p>
             <input type="text" name="fname" />
         </div>
         
         <div class="form-group">
             <label>Hinta</label>
-            <p>{{price}}</p>
+            <p>Nykyinen hinta: <b>{{tuote.price}}</b></p>
             <input type="text" name="price" />
         </div>
         
         <div class="form-group">
             <label>Alennus</label>
-            <p>{{tuote.sale}}</p>
+            <p>Nykyinen alennus: <b>{{tuote.sale}}</b></p>
             <input type="text" name="sale" />
         </div>
         <div class="form-group">
             <label>Kuvaus</label>
-            <p>{{tuote.description}}</p>
+            <p>Nykyinen kuvaus: <b>{{tuote.description}}</b></p>
             <input type="text" name="description" />
         </div>
 
@@ -29,7 +29,4 @@
             <button type="submit" class="btn btn-primary">Tallenna</button>
         </div>
     </form>
-<p>{{tuote.fname}} . Test</p>
-<p>Testi</p>
-    
 {% endblock %}

@@ -1,5 +1,6 @@
 <?php
 //require 'app/models/tuote.php';
+require 'app/models/tuoteryhma.php';
 class TuoteController extends BaseController{
     public static function tuotelista(){
         $tuotteet = Tuote::all();
@@ -13,7 +14,8 @@ class TuoteController extends BaseController{
             'fname' => $params['fname'],
             'price' => $params['price'],
             'sale' => $params['sale'],
-            'description' => $params['description']
+            'description' => $params['description'],
+            'groupid' => $params['groupid']
         ));
         
         $errors = $tuote->errors();
@@ -29,7 +31,8 @@ class TuoteController extends BaseController{
     
     public static function create(){
         self::check_logged_in();
-        View::make('tuote/new.html');
+        $tuoteryhmat = Tuoteryhma::all();
+        View::make('tuote/new.html', array('tuoteryhmat' => $tuoteryhmat));
     }
     
     public static function show($id){
@@ -45,12 +48,12 @@ class TuoteController extends BaseController{
     public static function edit($id){
         self::check_logged_in();
         $tuote = Tuote::find($id);
-        View::make('tuote/edit.html', array('attributes' => $tuote));
+        View::make('tuote/edit.html', array('tuote' => $tuote));
     }
     
     public static function update($id){
         self::check_logged_in();
-        /*
+        
         $params = $_POST;
         
         $attributes = array(
@@ -61,19 +64,18 @@ class TuoteController extends BaseController{
                 );
         
         $tuote = new Tuote($attributes);
-         * 
-         */
-        //$errors = $tuote->errors();
-        //$tuote->update();
-        /*
+        $errors = $tuote->errors();
+        
         if(count($errors) > 0){
             View::make('tuote/edit.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
             $tuote->update();
+            Redirect::to('/tuote/' . $tuote->id, array('message' => 'Onnistunut muokkaus') );
         }
-         * 
-         */
+         
+        
         //$tuote = Tuote::find($id);
+        /*
         $tuote = Tuote::update($id);
         
         $errors = $tuote->errors();
@@ -85,6 +87,8 @@ class TuoteController extends BaseController{
         } 
         
         // Redirect::to('/tuote/' . $tuote->id, array('message' => 'Muokkaus onnistui'));
+         * 
+         */
     }
     
     public static function remove($id){
@@ -94,4 +98,11 @@ class TuoteController extends BaseController{
         
         Redirect::to('/tuotteet', array('message' => 'Tuotteen poisto onnistui'));
     }
+    
+    public static function tuoteryhmalista(){
+        $tuoteryhmat = Tuoteryhma::all();
+        View::make('test.html', array('tuoteryhmat' => $tuoteryhmat));
+    }
+    
+    
 }

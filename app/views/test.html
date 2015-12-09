@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>Tuoteryhmät</h1>
+    {% for tuoteryhma in tuoteryhmat %}
+                <tr>
+                    <td>
+                        <p>{{tuoteryhma.fname}}</p>
+                        <p>{{tuoteryhma.description}}</p>
+                    </td>
+                </tr>
+    {% endfor %}  
+    
+{% endblock %}

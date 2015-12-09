@@ -1,15 +1,11 @@
 <?php
-/*
-  $routes->get('/', function() {
-    HelloWorldController::index();
-  });
-*/
-
 function check_logged_in(){
-    //Basecontroller::check_logged_in();
-    //jostain syystä löytää vain HelloWorldControllerin
     UserController::check_logged_in();
 }
+
+//function check_can_you_order(){
+//    TuoteController::check_can_you_order();
+//}
 
 $routes->get('/hiekkalaatikko', function() {
       HelloWorldController::sandbox();
@@ -18,13 +14,11 @@ $routes->get('/hiekkalaatikko', function() {
 $routes->get('/', function(){
     HelloWorldController::home();
 });
-  
-  //tuotteisiin liittyviä polkuja
-  
+    
+//tuotteisiin liittyviä toimintoja
 $routes->get('/muutaTietoja', 'check_logged_in', function(){
     TuoteController::muutaTuotetietoja();
-});
-  
+});  
 $routes->post('/tuote', 'check_logged_in', function(){
     TuoteController::store();
 });
@@ -34,14 +28,20 @@ $routes->get('/tuote/uusi', 'check_logged_in', function(){
 $routes->get('/tuote/:id', function($id){
     TuoteController::show($id);
 });
-
 $routes->get('/tuotteet', function(){
     TuoteController::tuotelista();
 });
+$routes->get('/tuote/:id/edit', 'check_logged_in', function($id){
+    TuoteController::edit($id);
+});
+$routes->post('/tuote/:id/edit', 'check_logged_in', function($id){
+    TuoteController::update($id);
+});
+$routes->post('/tuote/:id/remove', 'check_logged_in', function($id){
+    TuoteController::remove($id);
+});
 
-
-//tuotteen lisäys ja poisto
-
+//turhia
 $routes->get('/tuotteet/kimputTuoteTest', function(){
     TuoteController::kimput();
 });
@@ -50,56 +50,37 @@ $routes->get('/tuotteet/kimput', function(){
     TuoteController::kimput();
 });
 
-$routes->get('/tuote/:id/edit', 'check_logged_in', function($id){
-    TuoteController::edit($id);
-});
-
-$routes->post('/tuote/:id/edit', 'check_logged_in', function($id){
-    TuoteController::update($id);
-});
-
-$routes->post('/tuote/:id/remove', 'check_logged_in', function($id){
-    TuoteController::remove($id);
-});
-
-
-//sisäänkirjautuminen
-// UserController ei löydy, korjaus myöhemmin
-
+//sisäänkirjautuminen ja käyttäjiin liittyvät polut
 $routes->get('/kirjaudu', function(){
     UserController::login();        
 });
-
 $routes->post('/kirjaudu', function(){
     UserController::handle_login();        
 });
-
-//uloskirjautuminen
 $routes->post('/uloskirjautuminen', function(){
     UserController::logout();
 });
-
-//uuden käyttäjän luonti
 $routes->post('/kayttaja', function(){
     UserController::userStore();
 });
-
 $routes->get('/kayttaja/uusi', function(){
     UserController::userCreate();
 });
 $routes->get('/kayttaja/:userid', 'check_logged_in', function($userid){
     UserController::userShow($userid);
 });
-
 $routes->get('/kayttajat', 'check_logged_in', function(){
     UserController::kayttajalista(); 
 });
-
 $routes->post('/kayttaja/:userid/remove', 'check_logged_in', function($userid){
     UserController::userRemove($userid);
 });
-
 $routes->get('/testiikkuna', function(){
     UserController::testiSivu();
+});
+
+//testejä hetkeksi
+$routes->get('/testi/tuoteryhmat', function(){
+TuoteController::tuoteryhmalista();
 });
     

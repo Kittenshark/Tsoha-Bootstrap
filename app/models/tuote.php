@@ -1,7 +1,7 @@
 <?php
 
 class Tuote extends BaseModel{
-    public $id, $fname, $price, $sale, $description, $orderit, $reserve;
+    public $id, $fname, $price, $sale, $description, $orderit, $reserve, $groupid;
     
     public function __construct($attributes){
         parent::__construct($attributes);$attributes;
@@ -53,8 +53,8 @@ class Tuote extends BaseModel{
     }
     
     public function save(){
-        $query = DB::connection()->prepare('INSERT INTO Tuote (fname, price, sale, description) VALUES (:fname, :price, :sale, :description) RETURNING id');      
-        $query->execute(array('fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description));
+        $query = DB::connection()->prepare('INSERT INTO Tuote (fname, price, sale, description, groupid) VALUES (:fname, :price, :sale, :description, :groupid) RETURNING id');      
+        $query->execute(array('fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'groupid' => $this->groupid));
         $row = $query->fetch();
         
         //Kint::trace();
@@ -76,19 +76,18 @@ class Tuote extends BaseModel{
         //$this->tid = $row['tid'];
     }
   */
-    
-    public function update($id){
+    public function update(){
         //$query = DB::connection()->prepare('SELECT * FROM Tuote WHERE id = :id LIMIT 1');
         //$query->execute(array('id' => $id));
         //$query = "UPDATE fname, price, sale, description, orderIt, reserve SET :fname, :price, :sale, :description, :orderIt, :reserve WHERE id=:id";
-        $query = DB::connection()->prepare('UPDATE Tuote SET (fname, price, sale, description) VALUES (:fname, :price, :sale, :description');
-        $query->execute(array('fname' => $fname, 'price' => $price, 'sale' => $sale, 'description' => $description));
+        //$query = DB::connection()->prepare('UPDATE Tuote SET (fname, price, sale, description) = (:fname, :price, :sale, :description) WHERE id = :id');
+        //$query->execute(array('id' => $this->id, 'fname' => $fname, 'price' => $price, 'sale' => $sale, 'description' => $description));
         
-        $row = $query->fetch();
+        $query = DB::connection()->prepare('UPDATE Tuote SET fname = :fname, price = :price, sale = :sale, description = :description WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description));
         
-        Kint::dump($row);
+        //Kint::dump($row);
     }
-    
     public function remove($id){
         $query = DB::connection()->prepare('DELETE FROM Tuote WHERE id = :id');
         $query->execute(array('id' => $id));

@@ -15,13 +15,20 @@
     <div>    
         <p><h3>Kuvaus</h3></p>
         <p>{{tuote.description}}</p>
-    </div>                      
-    <div>
-        <button type="submit" class="btn btn-primary">Tilaa tuote</button>
-        <button type="submit" class="btn btn-primary">Varaa tuote</button>
     </div>
-    
     {% if user_logged_in %}
+    <div>
+        {% if tuote.orderit %}
+        <button type="submit" class="btn btn-primary active">Tilaa tuote</button>
+        {% else %}
+        <button type="submit" class="btn btn-primary disabled">Tilaa tuote</button>
+        {% endif %}
+        {% if tuote.reserve %}
+        <button type="submit" class="btn btn-primary active">Varaa tuote</button>
+        {% else %}
+        <button type="submit" class="btn btn-primary disabled">Varaa tuote</button>
+        {% endif %}
+    </div>  
     <div>
         <a href="{{base_path}}/tuote/{{tuote.id}}/edit"><p>Muokkaa</p></a>
     </div>
