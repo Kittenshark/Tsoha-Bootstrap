@@ -19,7 +19,7 @@
     {% if user_logged_in %}
     <div>
         {% if tuote.orderit %}
-        <button type="submit" class="btn btn-primary active">Tilaa tuote</button>
+         <a href="{{base_path}}/tuotteet/{{tuote.id}}/tilaa" class="btn btn-success">Tilaa tuote</a>
         {% else %}
         <button type="submit" class="btn btn-primary disabled">Tilaa tuote</button>
         {% endif %}

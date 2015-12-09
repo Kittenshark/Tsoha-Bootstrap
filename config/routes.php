@@ -39,10 +39,6 @@ $routes->post('/tuote/:id/remove', 'check_logged_in', function($id){
 });
 
 //turhia
-$routes->get('/tuotteet/kimputTuoteTest', function(){
-    TuoteController::kimput();
-});
-
 $routes->get('/tuotteet/kimput', function(){
     TuoteController::kimput();
 });
@@ -76,8 +72,8 @@ $routes->get('/testiikkuna', function(){
     UserController::testiSivu();
 });
 
-//testejä hetkeksi
-$routes->get('/testi/tuoteryhmat', function(){
-TuoteController::tuoteryhmalista();
+//Tilaukseen liittyvät
+$routes->get('/tuotteet/:id/tilaa', 'check_logged_in', function($id){
+    OstoController::create($id);
 });
     

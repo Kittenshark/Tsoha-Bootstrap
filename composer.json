@@ -6,7 +6,8 @@
 			"app/controllers",
                         "app/models/kayttaja.php",
                         "app/models/tuote.php",
-                        "app/models/tuoteryhma.php"
+                        "app/models/tuoteryhma.php",
+                        "app/models/tilaus.php"
 		]
 	},
 	"require": {

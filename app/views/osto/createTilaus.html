@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Tilaus</h3>
+<div>
+    <label>Tuotetiedot</label>
+    <p>{{tuote.fname}}</p>
+</div>
+<div>
+    <label>Tilauksen hinta</label>
+    <p>{{tuote.price}}</p>
+</div>
+<form method="post" action="" >
+    <div class="form-group">
+        <label>Toimitusosoite</label>
+        <input type="text" name="arrivaladdress"/>
+    </div>
+    <div class="form-group">
+        <label>Laskutusosoite</label>
+        <input type="text" name="billingaddress"/>
+    </div>
+</form>
+
+<div class="form-group">
+    <button type="submit" class="btn btn-primary">Tilaa</button>
+</div> 
+                
+{% endblock %}

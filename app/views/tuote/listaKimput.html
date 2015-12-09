@@ -6,16 +6,14 @@
                 
                  
                 {% for tuote in tuotteet %}
-                {% if tuote.groupid.id == 2 %}
-                <p>{{tuote.fname}}</p>
-                {% endif %}
+                {% if tuote.groupid == 2 %}       
                 <tr>
                     <td>
                         <a href="{{base_path}}/tuote/{{tuote.tid}}">{{tuote.fname}}</a>
                         <p>{{tuote.price}}</p>  
                     </td>
                 </tr>
-                
+                {% endif %}
                 {% endfor %}           
               </table>
     
