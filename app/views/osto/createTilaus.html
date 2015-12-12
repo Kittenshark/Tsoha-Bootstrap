@@ -2,6 +2,7 @@
 
 {% block content %}
 <h3>Tilaus</h3>
+
 <div>
     <label>Tuotetiedot</label>
     <p>{{tuote.fname}}</p>
@@ -10,7 +11,7 @@
     <label>Tilauksen hinta</label>
     <p>{{tuote.price}}</p>
 </div>
-<form method="post" action="" >
+<form method="post" action="{{base_path}}/tuotteet/{{tuote.id}}/tilaa" >
     <div class="form-group">
         <label>Toimitusosoite</label>
         <input type="text" name="arrivaladdress"/>
@@ -19,10 +20,9 @@
         <label>Laskutusosoite</label>
         <input type="text" name="billingaddress"/>
     </div>
-</form>
-
 <div class="form-group">
     <button type="submit" class="btn btn-primary">Tilaa</button>
-</div> 
+</div>
+</form>
                 
 {% endblock %}

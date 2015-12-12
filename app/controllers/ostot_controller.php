@@ -19,5 +19,41 @@ class OstoController extends BaseController{
         $tilaukset = Tilaus::all();
         View::make('osto/createTilaus.html', array('tilaukset' => $tilaukset));
     }
+    
+    public static function tilaa(){
+        
+    }
+    
+    public static function store($id){
+        self::check_logged_in();
+        //$tuote = Tuote::find($id);
+        $params = $_POST; 
+        $tuote = Tuote::find($id);
+
+        $tilaus = new Tilaus(array(
+            //'orderid' => $params['orderid'],
+            'price' => $tuote->price,
+            //'orderday' => time(),
+            'arrivaladdress' => $params['arrivaladdress'],
+            'billingaddress' => $params['billingaddress'],
+            'product_id' => $tuote->id,
+            'orderer' => $_SESSION['kayttaja']
+        ));
+        
+        $errors = $tilaus->errors();
+        
+        
+        if(count($errors) == 0){
+             $tilaus->save();
+             Redirect::to('/tilaus/' . $tilaus->orderid, array('message' => 'Tuote on tilattu'));
+        } else {
+            View::make('tuote/new.html', array('errors' => $errors));
+        }
+    }
+    
+    public static function showall(){
+        $tilaukset = Tilaus::all();
+        View::make('test.html', array('tilaukset' => $tilaukset));
+    }
 }
 

@@ -87,6 +87,17 @@ require 'app/models/kayttaja.php';
         $kayttajat = Kayttaja::all();
         View::make('kirjaudu/kayttajalista.html', array('kayttajat' => $kayttajat));
     }
+    
+    public static function getKayttaja(){
+        self::check_logged_in();
+        //$kayttaja = self::get_user_logged_in();
+        $userid = $_SESSION['kayttaja'];
+        //echo ('$userid');
+        //$kayttaja = Kayttaja::find($userid);
+        //$kayttaja = $_SESSION['kayttaja'];
+        Redirect::to('/kayttaja/' . $userid);
+        //return $kayttaja;
+    }       
     }
 
 

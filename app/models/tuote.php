@@ -93,7 +93,7 @@ class Tuote extends BaseModel{
         $query->execute(array('id' => $id));
     }
     //$this->id
-    
+ 
     public function validate_name(){
         
         $errors = array();

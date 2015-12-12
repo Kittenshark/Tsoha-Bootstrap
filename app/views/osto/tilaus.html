@@ -1,7 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<p><h3>Tilauksen tiedot</h3></p>
+    
+    <div>
+        <p><h2>Tilattu tuote</h2></p>
+        <p>{{tilaus.product_id}}</p>
+    </div>
+    <div>    
+        <p><h2>Hinta</h2></p>
+        <p>{{tilaus.price}}</p>
+    </div> 
+     <div>
+        <p><h2>Tilauspäivä</h2></p>
+        <p>{{tilaus.arrivaladdress}}}</p>
+    </div>
+    <div>    
+        <p><h2>Toimitusosoite</h2></p>
+        <p>{{tilaus.arrivaladdress}}</p>
+    </div>                      
+    <div>    
+        <p><h2>Laskutusosoite</h2></p>
+        <p>{{tilaus.billingaddress}}</p>
+    </div>
+    <div>    
+        <p><h2>Tilaaja</h2></p>
+        <p>{{tilaus.orderer}}</p>
+    </div> 
                 
 {% endblock %}
 

@@ -1,10 +1,10 @@
 <?php
 class Tilaus extends BaseModel{
-    public $orderId, $price, $orderDay, $arrivalAddress, $billingAddress, $product_id, $orderer;
+    public $orderid, $price, $orderday, $arrivaladdress, $billingaddress, $product_id, $orderer;
     
     public function __construct($attributes){
         parent::__construct($attributes);$attributes;
-       // $this->validators = array('validate_name', 'validate_pricing_is_number');
+       $this->validators = array('validate_address');
     }
     
     public static function all(){
@@ -16,11 +16,11 @@ class Tilaus extends BaseModel{
         
         foreach ($rows as $row) {
             $tilaukset[] = new Tilaus(array(
-                'orderId' => $row['orderId'],
+                'orderid' => $row['orderid'],
                 'price' => $row['price'],
-                'orderDay' => $row['orderDay'],
-                'arrivalAddress' => $row['arrivalAddress'],
-                'billingAddress' => $row['billingAddress'],
+                'orderday' => $row['orderday'],
+                'arrivaladdress' => $row['arrivaladdress'],
+                'billingaddress' => $row['billingaddress'],
                 'product_id' => $row['product_id'],
                 'orderer' => $row['orderer']
             ));
@@ -28,18 +28,18 @@ class Tilaus extends BaseModel{
         return $tilaukset;
     }
     
-    public static function find($orderId){
-        $query = DB::connection()->prepare('SELECT * FROM Tilaus WHERE orderId = :orderId LIMIT 1');
-        $query->execute(array('orderId' => $orderId));
+    public static function find($orderid){
+        $query = DB::connection()->prepare('SELECT * FROM Tilaus WHERE orderid = :orderid LIMIT 1');
+        $query->execute(array('orderid' => $orderid));
         $row = $query->fetch();
         
         if($row){
             $tilaus = new Tilaus(array(
-                'orderId' => $row['orderId'],
+                'orderid' => $row['orderid'],
                 'price' => $row['price'],
-                'orderDay' => $row['orderDay'],
-                'arrivalAddress' => $row['arrivalAddress'],
-                'billingAddress' => $row['billingAddress'],
+                'orderday' => $row['orderday'],
+                'arrivaladdress' => $row['arrivaladdress'],
+                'billingaddress' => $row['billingaddress'],
                 'product_id' => $row['product_id'],
                 'orderer' => $row['orderer']
             ));
@@ -50,13 +50,13 @@ class Tilaus extends BaseModel{
     }
     
     public function save(){
-        $query = DB::connection()->prepare('INSERT INTO Tilaus (orderDay, arrivalAddress, billingAddress, product_id, orderer) VALUES (:orderDay, :arrivalAddress, :billingAddress, :prooduct_id, orderer) RETURNING id');      
-        $query->execute(array('orderDay' => $this->orderDay, 'arrivalAddress' => $this->arrivalAddress, 'billingAddress' => $this->billingAddress, 'product_id' => $this->product_id, 'orderer' => $this->orderer));
+        $query = DB::connection()->prepare('INSERT INTO Tilaus (price, orderday, arrivaladdress, billingaddress, product_id, orderer) VALUES (:price, :orderday, :arrivaladdress, :billingaddress, :product_id, :orderer) RETURNING orderid');      
+        $query->execute(array('price' => $this->price, 'orderday' => $this->orderday, 'arrivaladdress' => $this->arrivaladdress, 'billingaddress' => $this->billingaddress, 'product_id' => $this->product_id, 'orderer' => $this->orderer));
         $row = $query->fetch();
         
-        $this->orderId = $row['orderId'];
+        $this->orderid = $row['orderid'];
     }
-    
+    /*
     public function countPrice(){
         $query = DB::connection()->prepare('SELECT * FROM Tilaus INNER JOIN TUOTE ON tuote.id = $this->product_id');
         $query->execute();
@@ -69,5 +69,17 @@ class Tilaus extends BaseModel{
         $query = DB::connection()->prepape('SELECT Tuote.fname, Tuote.price, Tuote.sale, Kayttaja.userid FROM Tilaus INNER JOIN Tuote ON Tilaus.orderer = Kayttaja.userid' );
         $query->execute();
         
+    }
+    
+     * 
+     */
+    public function validate_address(){
+        $errors = array();
+        if($this->arrivaladdress== '' || $this->arrivaladdress== null || $this->billingaddress == '' || $this->billingaddress == null){
+            $errors[] ='Täytä tyhjät kentät';
+        }
+        
+        return $errors; 
+         
     }
 }

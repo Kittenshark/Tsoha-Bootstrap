@@ -71,9 +71,20 @@ $routes->post('/kayttaja/:userid/remove', 'check_logged_in', function($userid){
 $routes->get('/testiikkuna', function(){
     UserController::testiSivu();
 });
+$routes->get('/kayttaja/haekayttaja', 'check_logged_in', function(){
+    UserController::getKayttaja();
+});
 
 //Tilaukseen liittyvät
 $routes->get('/tuotteet/:id/tilaa', 'check_logged_in', function($id){
     OstoController::create($id);
+});
+$routes->post('/tuotteet/:id/tilaa', 'check_logged_in', function($id){
+    OstoController::store($id);
+});
+
+//testi
+$routes->get('/testipalikka','check_logged_in', function(){
+    OstoController::showall(); 
 });
     

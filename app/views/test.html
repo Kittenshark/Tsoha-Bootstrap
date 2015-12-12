@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Tilauslista</h2>
+    {% if user_logged_in %}
+    {% endif %}
+            <table style="width:100vh">
+                
+                 
+                {% for tilaus in tilaukset %}
+
+                <tr>
+                    <td>
+                        <p>Tilausnumero {{tilaus.orderid}}</p>
+                        <p>Tilauksen hinta {{tilaus.price}}</p>
+                        <p>Tilaaja {{tilaus.orderer}}</p>
+                        <p>Tilauspäivä {{tilaus.orderday}}</p>
+                        <p>Toimitusosoite {{tilaus.arrivaladdress}}</p>
+                        <p>Laskutusosoite {{tilaus.billingaddress}}</p>
+                    </td>
+                </tr>
+                
+                {% endfor %}           
+              </table>
+    
+{% endblock %}

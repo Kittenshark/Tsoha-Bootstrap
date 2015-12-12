@@ -2,17 +2,34 @@
 
 {% block content %}
     <p><h3>Nimi</h3></p>
-    
+
     <p>{{tuote.fname}}</p>
+    
     <div class="form-group">
         <p><h3>Hinta</h3></p>
-        <p>{{tuote.price}}</p>
-    </div>
     {% if tuote.sale > 0 %}
-     <div id="alennus">
-        <p><h3>Alennuksessa!</h3></p>
-        <p>-{{tuote.sale}} %</p>
+        <b>
+        <script>
+            var x = {{tuote.price}};
+            var y = {{tuote.sale}};
+            
+            function laske(x, y){
+                //var tulos = parseFloat(Math.round(num3 * 100) / 100).toFixed(2);
+                var tulos = x * (1 - y/100);
+                //tulos.toFixed(2);
+                document.writeln(tulos.toFixed(2) + "€");
+                
+            }
+            laske(x, y);
+        </script>
+        </b><p>(normaali hinta {{tuote.price}}€)</p>
     </div>
+    
+     <div id="alennus">
+        <p><h3>Alennus -{{tuote.sale}} %</h3></p>
+    </div>
+    {% else %}
+    <p>{{tuote.price}}</p>
     {% endif %}
     <div>    
         <p><h3>Kuvaus</h3></p>
@@ -40,5 +57,5 @@
         </form>
     </div>
     {% endif %}
-                
+           
 {% endblock %}

@@ -92,5 +92,5 @@ class TuoteController extends BaseController{
         View::make('test.html', array('tuoteryhmat' => $tuoteryhmat));
     }
     
-    
+
 }
