@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table style="width:100%">
+        <tr>
+            <th>Tuote</th>
+            <th>Hinta</th>
+            <th>Toimitusosoite</th>
+            <th>Laskutusosoite</th>
+            <th>Tilauspäivä</th>
+        </tr>
+         {% for tilaus in tilaukset %}
+        <tr>
+            <td><a href="{{base_path}}/tuote/{{tilaus.product_id}}">Tuote</a></td>
+            <td>{{tilaus.price}}</td>
+            <td>{{tilaus.arrivaladdress}}</td>
+            <td>{{tilaus.billingaddress}}</td>
+            <td>{{tilaus.orderday}}</td>
+        </tr>
+        {% endfor %}
+</table>
+
+{% endblock %}
+

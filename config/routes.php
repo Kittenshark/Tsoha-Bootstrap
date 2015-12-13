@@ -87,4 +87,8 @@ $routes->post('/tuotteet/:id/tilaa', 'check_logged_in', function($id){
 $routes->get('/testipalikka','check_logged_in', function(){
     OstoController::showall(); 
 });
+
+$routes->get('/testilista', 'check_logged_in', function(){
+    OstoController::findyourorders();
+});
     

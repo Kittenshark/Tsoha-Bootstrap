@@ -20,8 +20,13 @@ CREATE TABLE Tuote(
     sale DECIMAL,
     description varchar(200),
     orderIt boolean DEFAULT FALSE,
-    reserve boolean DEFAULT FALSE,
-    groupid INTEGER REFERENCES Tuoteryhma(id)
+    reserve boolean DEFAULT FALSE
+);
+
+CREATE TABLE TuoteJaRyhmaYhdiste(
+    product_id INTEGER REFERENCES Tuote(id),
+    groupid INTEGER REFERENCES Tuoteryhma(id),
+    PRIMARY KEY(product_id, groupid)
 );
 
 CREATE TABLE Tilaus(

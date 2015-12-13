@@ -9,25 +9,53 @@ class TuoteController extends BaseController{
     
     public static function store(){
         self::check_logged_in();
+        
         $params = $_POST;
+        /*
+        $tuoteryhmat = $params['tuoteryhmat'];
+        $attributes = array(
+            'fname' => $params['fname'],
+            'price' => $params['price'],
+            'sale' => $params['sale'],
+            'description' => $params['description'],
+            'groupid' => array(),
+            'orderit' => $params['orderit'],
+            'reserve' => $params['reserve']
+        );
+        
+        foreach($tuoteryhmat as $tuoteryhma){
+            $attributes['tuoteryhmat'][] = $tuoteryhma;
+        }
+         * 
+         */
         $tuote = new Tuote(array(
             'fname' => $params['fname'],
             'price' => $params['price'],
             'sale' => $params['sale'],
             'description' => $params['description'],
-            'groupid' => $params['groupid'],
             'orderit' => $params['orderit'],
-            'reserve' => $params['reserve']
+            'reserve' => $params['reserve'],
         ));
         
+        
+       
+        
+        //$tuote = new Tuote($attributes);
         $errors = $tuote->errors();
         
         if(count($errors) == 0){
              $tuote->save();
+             $id = $tuote->id;
+        $tuoteryhmat = $params['tuoteryhmat'];
+        
+        foreach($tuoteryhmat as $tuoteryhma){
+            $tuote->createTuoteYhdiste($id, $tuoteryhma);
+        }
              Redirect::to('/tuote/' . $tuote->id, array('message' => 'Uusi tuote on luotu'));
         } else {
             View::make('tuote/new.html', array('errors' => $errors));
         }
+        
        
     }
     

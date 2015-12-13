@@ -55,5 +55,10 @@ class OstoController extends BaseController{
         $tilaukset = Tilaus::all();
         View::make('test.html', array('tilaukset' => $tilaukset));
     }
+    
+    public static function findyourorders(){
+        $tilaukset = Tilaus::findyourorders();
+         View::make('osto/omattilaukset.html', array('tilaukset' => $tilaukset));
+    }
 }
 

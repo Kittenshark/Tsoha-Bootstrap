@@ -40,5 +40,8 @@
      */
     
     //validate metodeja
+    public function string_not_too_long(){
+        
+    }
 
   }

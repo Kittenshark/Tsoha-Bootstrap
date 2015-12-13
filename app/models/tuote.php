@@ -23,8 +23,7 @@ class Tuote extends BaseModel{
                 'sale' => $row['sale'],
                 'description' => $row['description'],
                 'orderit' => $row['orderit'],
-                'reserve' => $row['reserve'],
-                'groupid' => $row['groupid']
+                'reserve' => $row['reserve']
             ));
         }
         return $tuotteet;
@@ -43,8 +42,7 @@ class Tuote extends BaseModel{
                 'sale' => $row['sale'],
                 'description' => $row['description'],
                 'orderit' => $row['orderit'],
-                'reserve' => $row['reserve'],
-                'groupid' => $row['groupid']
+                'reserve' => $row['reserve']
             ));
             return $tuote;
         } else {
@@ -53,8 +51,8 @@ class Tuote extends BaseModel{
     }
     
     public function save(){
-        $query = DB::connection()->prepare('INSERT INTO Tuote (fname, price, sale, description, groupid, orderit, reserve) VALUES (:fname, :price, :sale, :description, :groupid, :orderit, :reserve) RETURNING id');      
-        $query->execute(array('fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'groupid' => $this->groupid, 'orderit' => $this->orderit, 'reserve' => $this->reserve));
+        $query = DB::connection()->prepare('INSERT INTO Tuote (fname, price, sale, description, orderit, reserve) VALUES (:fname, :price, :sale, :description, :orderit, :reserve) RETURNING id');      
+        $query->execute(array('fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'orderit' => $this->orderit, 'reserve' => $this->reserve));
         $row = $query->fetch();
         
         //Kint::trace();
@@ -93,6 +91,29 @@ class Tuote extends BaseModel{
         $query->execute(array('id' => $id));
     }
     //$this->id
+    
+    public function getTuoteryhmat(){
+        $tuoteryhmat = array();
+        $query = DB::connection()->prepare('SELECT * FROM Tuoteryhmä WHERE groupid IN (SELECT * FROM TuoteJaRyhmaYhdiste WHERE product_id = :product_id');
+        $query->execute(array('product_id' => $this->product_id));
+        $row = $query->fetchAll();
+        
+        foreach ($rows as $row) {
+            $tuoteryhmat[] = new Tuoteryhma(array(
+                'id' => $row['id'],
+                'fname' => $row['fname'],
+                'description' => $row['description']
+            ));
+        }
+        return $tuoteryhmat;
+    }
+    
+    public function createTuoteYhdiste($product_id, $groupid){
+        $query = DB::connection()->prepare('INSERT INTO TuoteJaRyhmaYhdiste (product_id, groupid) VALUES (:product_id, :groupid)');      
+        $query->execute(array('product_id' => $product_id, 'groupid' => $groupid));
+    }
+    
+
  
     public function validate_name(){
         

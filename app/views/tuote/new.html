@@ -34,7 +34,7 @@
         </div>
         <div class="form-group">
             <label>Tuoteryhmä</label>
-            <select class="form-control" name="groupid">
+            <select class="form-control" name="tuoteryhmat[]" multiple="">
                 {% for tuoteryhma in tuoteryhmat %}
                 <option value="{{tuoteryhma.id}}">{{tuoteryhma.fname}}</option>
                 {% endfor %}

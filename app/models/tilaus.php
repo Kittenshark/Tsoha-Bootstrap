@@ -13,18 +13,7 @@ class Tilaus extends BaseModel{
         
         $rows = $query->fetchAll();
         $tilaukset = array();
-        
-        foreach ($rows as $row) {
-            $tilaukset[] = new Tilaus(array(
-                'orderid' => $row['orderid'],
-                'price' => $row['price'],
-                'orderday' => $row['orderday'],
-                'arrivaladdress' => $row['arrivaladdress'],
-                'billingaddress' => $row['billingaddress'],
-                'product_id' => $row['product_id'],
-                'orderer' => $row['orderer']
-            ));
-        }
+        $tilaukset = self::rivitKuntoon($rows);
         return $tilaukset;
     }
     
@@ -55,6 +44,31 @@ class Tilaus extends BaseModel{
         $row = $query->fetch();
         
         $this->orderid = $row['orderid'];
+    }
+    
+    public static function  findyourorders(){
+        $query = DB::connection()->prepare('SELECT * FROM Tilaus INNER JOIN Kayttaja ON tilaus.orderer = kayttaja.userid');
+        $query->execute();
+        
+        $rows = $query->fetchAll();
+        $tilaukset = array();
+        $tilaukset = self::rivitKuntoon($rows);
+        return $tilaukset;
+    }
+    
+    public static function rivitKuntoon($rows){
+        foreach ($rows as $row) {
+            $tilaukset[] = new Tilaus(array(
+                'orderid' => $row['orderid'],
+                'price' => $row['price'],
+                'orderday' => $row['orderday'],
+                'arrivaladdress' => $row['arrivaladdress'],
+                'billingaddress' => $row['billingaddress'],
+                'product_id' => $row['product_id'],
+                'orderer' => $row['orderer']
+            ));
+        }
+        return $tilaukset;
     }
     /*
     public function countPrice(){
