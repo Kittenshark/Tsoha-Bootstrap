@@ -4,27 +4,27 @@
 <p><h3>Tilauksen tiedot</h3></p>
     
     <div>
-        <p><h2>Tilattu tuote</h2></p>
-        <p>{{tilaus.product_id}}</p>
+        <p><b><h4>Tilattu tuote</h4></b></p>
+        <a href="{{base_path}}/tuote/{{tilaus.product_id}}">Tuote</a>
     </div>
     <div>    
-        <p><h2>Hinta</h2></p>
+        <p><b><h4>Hinta</h4></b></p>
         <p>{{tilaus.price}}</p>
     </div> 
      <div>
-        <p><h2>Tilauspäivä</h2></p>
-        <p>{{tilaus.arrivaladdress}}}</p>
+        <p><b><h4>Tilauspäivä</h4></b></p>
+        <p>{{tilaus.orderday}}</p>
     </div>
     <div>    
-        <p><h2>Toimitusosoite</h2></p>
+        <p><b><h4>Toimitusosoite</h4></b></p>
         <p>{{tilaus.arrivaladdress}}</p>
     </div>                      
     <div>    
-        <p><h2>Laskutusosoite</h2></p>
+        <p><b><h4>Laskutusosoite</h4></b></p>
         <p>{{tilaus.billingaddress}}</p>
     </div>
     <div>    
-        <p><h2>Tilaaja</h2></p>
+        <p><b><h4>Tilaaja</h4></b></p>
         <p>{{tilaus.orderer}}</p>
     </div> 
                 

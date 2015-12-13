@@ -145,7 +145,7 @@
             {% else %}
             <div id="kirjautuminen">
                 <p>
-                    <a href="http://evkossi.users.cs.helsinki.fi/kukkia/kirjaudu" class="btn btn-default">Kirjaudu</a>
+                    <a href="{{base_path}}/kirjaudu" class="btn btn-default">Kirjaudu</a>
                 </p>  
             </div>
             {% endif %}
@@ -160,19 +160,20 @@
 
         <ul id="sidebar">
             <li><a href="http://evkossi.users.cs.helsinki.fi/kukkia/"><b>Etusivu</b></a></li>
-            <li><a href="#alennukset"><b>Alennukset</b></a></li>
+            <li><a href="{{base_path}}/alennukset"><b>Alennukset</b></a></li>
             <li><a href="#info"><b>Yritysinfo</b></a></li>
             {% if user_logged_in %}
-            <li><a href="{{base_path}}/kayttajat"><b>Käyttäjät</b></a></li>
+            <li><a href="{{base_path}}/admin"><b>Admin</b></a></li>
             {% endif %}
         </ul>
         </div>
         
         <div id="valikko">
             <ul id="upbar">
-                <li><a href="http://evkossi.users.cs.helsinki.fi/kukkia/tuotteet"><b>Tuotelista</b></a></li>
-                <li><a href="#B"><b>Asetelmat</b></a></li>
-                <li><a href="http://evkossi.users.cs.helsinki.fi/kukkia/tuotteet/kimput"><b>Kimput</b></a></li>
+                <li><a href="{{base_path}}/tuotteet"><b>Tuotelista</b></a></li>
+                <li><a href="{{base_path}}/tuotteet/tuoteryhmat"><b>Tuoteryhmat</b></a></li>
+                <li><a href="{{base_path}}//tuoteryhma/1"><b>Viherkasvit</b></a></li>
+                <li><a href="{{base_path}}//tuoteryhma/2"><b>Kimput</b></a></li>
                 <li><a href="#D"><b>Kukat</b></a></li>
             </ul>
         </div>

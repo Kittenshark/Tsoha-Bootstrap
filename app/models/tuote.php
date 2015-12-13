@@ -61,32 +61,14 @@ class Tuote extends BaseModel{
         $this->id = $row['id'];
     }
     
-    /*
-    public function save(){
-        $query = DB::connection()->prepare('INSERT INTO Tuote (fname, price, sale, description, orderit, reserve, groupid)'
-                . 'VALUES (:fname, :price, :sale, :description, :orderit, :reserve,  :groupid) RETURNING id');      
-        $query->execute(array('fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'orderit' => $this->orderit, 'reserve' => $this->reserve, 'groupid' => $this->groupid));
-        
-        $row = $query->fetch();
-        Kint::trace();
-        Kint::dump($row);
-        
-        //$this->tid = $row['tid'];
-    }
-  */
     public function update(){
-        //$query = DB::connection()->prepare('SELECT * FROM Tuote WHERE id = :id LIMIT 1');
-        //$query->execute(array('id' => $id));
-        //$query = "UPDATE fname, price, sale, description, orderIt, reserve SET :fname, :price, :sale, :description, :orderIt, :reserve WHERE id=:id";
-        //$query = DB::connection()->prepare('UPDATE Tuote SET (fname, price, sale, description) = (:fname, :price, :sale, :description) WHERE id = :id');
-        //$query->execute(array('id' => $this->id, 'fname' => $fname, 'price' => $price, 'sale' => $sale, 'description' => $description));
-        
         $query = DB::connection()->prepare('UPDATE Tuote SET fname = :fname, price = :price, sale = :sale, description = :description, orderit = :orderit, reserve = :reserve WHERE id = :id');
         $query->execute(array('id' => $this->id, 'fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'orderit' => $this->orderit, 'reserve' => $this->reserve));
         
         //Kint::dump($row);
     }
     public function remove($id){
+        self::testiremove($id);
         $query = DB::connection()->prepare('DELETE FROM Tuote WHERE id = :id');
         $query->execute(array('id' => $id));
     }
@@ -100,7 +82,7 @@ class Tuote extends BaseModel{
         
         foreach ($rows as $row) {
             $tuoteryhmat[] = new Tuoteryhma(array(
-                'id' => $row['id'],
+                'groupid' => $row['groupid'],
                 'fname' => $row['fname'],
                 'description' => $row['description']
             ));
@@ -113,7 +95,60 @@ class Tuote extends BaseModel{
         $query->execute(array('product_id' => $product_id, 'groupid' => $groupid));
     }
     
-
+    public function removeTuoteYhdiste($product_id){
+        $query = DB::connection()->prepare('DELETE FROM TuoteJaRyhmaYhdiste WHERE product_id = :product_id');
+        $query->execute(array('product_id' => $product_id));
+    }
+    
+    public function testiremove($product_id){
+        $query = DB::connection()->prepare('DELETE FROM TuoteJaRyhmaYhdiste WHERE product_id = :product_id');
+        $query->execute(array('product_id' => $product_id));
+    }
+    
+    public static function listSales(){
+        $query = DB::connection()->prepare('SELECT * FROM Tuote WHERE sale > 0 ORDER BY fname');
+        $query->execute();
+        
+        $rows = $query->fetchAll();
+        $tuotteet = array();
+        
+        foreach ($rows as $row) {
+            $tuotteet[] = new Tuote(array(
+                'id' => $row['id'],
+                'fname' => $row['fname'],
+                'price' => $row['price'],
+                'sale' => $row['sale'],
+                'description' => $row['description'],
+                'orderit' => $row['orderit'],
+                'reserve' => $row['reserve']
+            ));
+        }
+        return $tuotteet;
+    }
+    
+    public static function listThings($groupid){
+        //SELECT * FROM Tuoteryhmä WHERE groupid IN (SELECT * FROM TuoteJaRyhmaYhdiste WHERE product_id = :product_id
+        $query = DB::connection()->prepare('SELECT * FROM Tuote WHERE EXISTS (SELECT * FROM TuoteJaRyhmaYhdiste AS y WHERE Tuote.id = y.product_id AND groupid = :groupid)');
+        //$query->execute(array('groupid' => $groupid));
+        $query->execute(array('groupid' => $groupid));
+        //$query->execute(array('id' => $id));
+        
+        $rows = $query->fetchAll();
+        $tuotteet = array();
+        
+        foreach ($rows as $row) {
+            $tuotteet[] = new Tuote(array(
+                'id' => $row['id'],
+                'fname' => $row['fname'],
+                'price' => $row['price'],
+                'sale' => $row['sale'],
+                'description' => $row['description'],
+                'orderit' => $row['orderit'],
+                'reserve' => $row['reserve']
+            ));
+        }
+        return $tuotteet;
+    }
  
     public function validate_name(){
         

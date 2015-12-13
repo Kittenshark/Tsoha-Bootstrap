@@ -70,30 +70,24 @@ class Tilaus extends BaseModel{
         }
         return $tilaukset;
     }
-    /*
-    public function countPrice(){
-        $query = DB::connection()->prepare('SELECT * FROM Tilaus INNER JOIN TUOTE ON tuote.id = $this->product_id');
-        $query->execute();
+    
+    public static function listuserorders($orderer){
+        $query = DB::connection()->prepare('SELECT * FROM Tilaus WHERE orderer = :orderer');
+        $query->execute(array('orderer' => $orderer));
         $rows = $query->fetchAll();
         
-        //$this->price = Tuote::price;
-    }
-    
-    public static function find_all_orders(){
-        $query = DB::connection()->prepape('SELECT Tuote.fname, Tuote.price, Tuote.sale, Kayttaja.userid FROM Tilaus INNER JOIN Tuote ON Tilaus.orderer = Kayttaja.userid' );
-        $query->execute();
+        $tilaukset = array();
+        $tilaukset = self::rivitKuntoon($rows);
         
+        return $tilaukset;
     }
-    
-     * 
-     */
+
     public function validate_address(){
         $errors = array();
         if($this->arrivaladdress== '' || $this->arrivaladdress== null || $this->billingaddress == '' || $this->billingaddress == null){
             $errors[] ='Täytä tyhjät kentät';
         }
         
-        return $errors; 
-         
+        return $errors;     
     }
 }

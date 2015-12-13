@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Tilauslista</h2>
+            <table style="width:100vh">
+                <tr>
+                    <th>Tuoteryhmä</th>
+                    <th>Kuvaus</th>
+                </tr>
+                {% for tuoteryhma in tuoteryhmat %}
+                <tr>
+                    <td><a href="{{base_path}}//tuoteryhma/{{tuoteryhma.id}}">{{tuoteryhma.fname}}</td>  
+                    <td>{{tuoteryhma.description}}</td>
+                </tr>
+                
+                {% endfor %}           
+            </table>
+    
+{% endblock %}

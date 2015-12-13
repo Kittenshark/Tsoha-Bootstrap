@@ -1,6 +1,4 @@
 <?php
-require 'app/models/tuote.php';
-require 'app/models/kayttaja.php';
     class UserController extends BaseController{
         public static function login(){
             View::make('kirjaudu/kirjaudu.html');
@@ -90,14 +88,30 @@ require 'app/models/kayttaja.php';
     
     public static function getKayttaja(){
         self::check_logged_in();
+        //$id = $_SESSION['kayttaja'];
+        $id = 2;
+        Redirect::to('/kayttaja/' .$id);
         //$kayttaja = self::get_user_logged_in();
-        $userid = $_SESSION['kayttaja'];
+        //$userid = $_SESSION['kayttaja'];
         //echo ('$userid');
         //$kayttaja = Kayttaja::find($userid);
         //$kayttaja = $_SESSION['kayttaja'];
-        Redirect::to('/kayttaja/' . $userid);
+        //Redirect::to('/kayttaja/' . $userid);
+        
         //return $kayttaja;
-    }       
+    }
+    
+    public static function testikappale(){
+        self::check_logged_in();
+        Redirect::to('/admin');
+    }
+    
+    public static function admin(){
+        self::check_logged_in();
+        View::make('admin/adminedit.html');
+    }
+    
+    
     }
 
 

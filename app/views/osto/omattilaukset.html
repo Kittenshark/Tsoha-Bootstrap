@@ -3,6 +3,7 @@
 {% block content %}
 <table style="width:100%">
         <tr>
+            <th></th>
             <th>Tuote</th>
             <th>Hinta</th>
             <th>Toimitusosoite</th>
@@ -11,6 +12,7 @@
         </tr>
          {% for tilaus in tilaukset %}
         <tr>
+            <td><a href="{{base_path}}/tilaus/{{tilaus.orderid}}">Tilaus</a></td>
             <td><a href="{{base_path}}/tuote/{{tilaus.product_id}}">Tuote</a></td>
             <td>{{tilaus.price}}</td>
             <td>{{tilaus.arrivaladdress}}</td>

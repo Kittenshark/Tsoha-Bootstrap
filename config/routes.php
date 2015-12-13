@@ -3,14 +3,10 @@ function check_logged_in(){
     UserController::check_logged_in();
 }
 
-//function check_can_you_order(){
-//    TuoteController::check_can_you_order();
-//}
-
 $routes->get('/hiekkalaatikko', function() {
       HelloWorldController::sandbox();
   });
-  
+//etusivu
 $routes->get('/', function(){
     HelloWorldController::home();
 });
@@ -38,11 +34,6 @@ $routes->post('/tuote/:id/remove', 'check_logged_in', function($id){
     TuoteController::remove($id);
 });
 
-//turhia
-$routes->get('/tuotteet/kimput', function(){
-    TuoteController::kimput();
-});
-
 //sisäänkirjautuminen ja käyttäjiin liittyvät polut
 $routes->get('/kirjaudu', function(){
     UserController::login();        
@@ -68,12 +59,6 @@ $routes->get('/kayttajat', 'check_logged_in', function(){
 $routes->post('/kayttaja/:userid/remove', 'check_logged_in', function($userid){
     UserController::userRemove($userid);
 });
-$routes->get('/testiikkuna', function(){
-    UserController::testiSivu();
-});
-$routes->get('/kayttaja/haekayttaja', 'check_logged_in', function(){
-    UserController::getKayttaja();
-});
 
 //Tilaukseen liittyvät
 $routes->get('/tuotteet/:id/tilaa', 'check_logged_in', function($id){
@@ -82,13 +67,42 @@ $routes->get('/tuotteet/:id/tilaa', 'check_logged_in', function($id){
 $routes->post('/tuotteet/:id/tilaa', 'check_logged_in', function($id){
     OstoController::store($id);
 });
+$routes->get('/tilaus/:id', 'check_logged_in', function($id){
+    OstoController::showTilaus($id);
+});
 
 //testi
 $routes->get('/testipalikka','check_logged_in', function(){
     OstoController::showall(); 
 });
-
 $routes->get('/testilista', 'check_logged_in', function(){
     OstoController::findyourorders();
+});
+$routes->get('/ktest', 'check_logged_in', function(){
+    UserController::getKayttaja();
+});
+
+//erilaisia listoja eri "hakutermeillä"
+//tuoteryhma/:id vastaa listaa tuotteista, jotka kuuluvat tuoteryhmään (ei yksittäisen tuoteryhmän sivu)
+$routes->get('/tuoteryhma/:id', function($id){
+    TuoteController::showRyhma($id);
+});
+$routes->get('/alennukset', function(){
+    TuoteController::listSales();
+});
+
+//testi
+$routes->get('/tuotteet/tuoteryhmat', function(){
+    TuoteController::tuoteryhmalista();
+});
+
+//admin, lisäysmahdollisuudet
+$routes->get('/admin', 'check_logged_in', function(){
+    UserController::admin();
+});
+
+//kayttajan tilaukset
+$routes->get('/kayttaja/:id/tilaukset', function($id){
+    OstoController::listuserorders($id);
 });
     

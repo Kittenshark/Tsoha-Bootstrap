@@ -20,8 +20,10 @@ class OstoController extends BaseController{
         View::make('osto/createTilaus.html', array('tilaukset' => $tilaukset));
     }
     
-    public static function tilaa(){
-        
+    public static function showTilaus($orderid){
+        self::check_logged_in();
+        $tilaus = Tilaus::find($orderid);
+        View::make('osto/tilaus.html', array('tilaus' => $tilaus));
     }
     
     public static function store($id){
@@ -59,6 +61,11 @@ class OstoController extends BaseController{
     public static function findyourorders(){
         $tilaukset = Tilaus::findyourorders();
          View::make('osto/omattilaukset.html', array('tilaukset' => $tilaukset));
+    }
+    
+    public static function listuserorders($id){
+        $tilaukset = Tilaus::listuserorders($id);
+        View::make('osto/omattilaukset.html', array('tilaukset' => $tilaukset));
     }
 }
 

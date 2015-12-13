@@ -2,14 +2,8 @@
 
 {% block content %}
     <h2>Tuotelista</h2>
-    {% if user_logged_in %}
-    <p><a href="{{base_path}}/tuote/uusi">Lisää tuote</a></p>
-    {% endif %}
             <table style="width:100vh">
-                
-                 
                 {% for tuote in tuotteet %}
-
                 <tr>
                     <td>
                         <a href="{{base_path}}/tuote/{{tuote.id}}">{{tuote.fname}}</a>
@@ -17,11 +11,16 @@
                         {% if tuote.sale > 0 %}
                         <div id="alennus">
                             <p>Alennuksessa -{{tuote.sale}}%!</p>
+                            <script type="text/javacript" src="site.js"></script>
+                            <script>
+                                var numero = laskenta();
+                                document.writeln(numero);
+                            </script>
+                            
                         </div>
                         {% endif %}
                     </td>
                 </tr>
-                
                 {% endfor %}           
               </table>
     

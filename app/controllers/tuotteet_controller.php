@@ -1,6 +1,4 @@
 <?php
-//require 'app/models/tuote.php';
-require 'app/models/tuoteryhma.php';
 class TuoteController extends BaseController{
     public static function tuotelista(){
         $tuotteet = Tuote::all();
@@ -11,52 +9,30 @@ class TuoteController extends BaseController{
         self::check_logged_in();
         
         $params = $_POST;
-        /*
-        $tuoteryhmat = $params['tuoteryhmat'];
-        $attributes = array(
-            'fname' => $params['fname'],
-            'price' => $params['price'],
-            'sale' => $params['sale'],
-            'description' => $params['description'],
-            'groupid' => array(),
-            'orderit' => $params['orderit'],
-            'reserve' => $params['reserve']
-        );
         
-        foreach($tuoteryhmat as $tuoteryhma){
-            $attributes['tuoteryhmat'][] = $tuoteryhma;
-        }
-         * 
-         */
         $tuote = new Tuote(array(
             'fname' => $params['fname'],
             'price' => $params['price'],
             'sale' => $params['sale'],
             'description' => $params['description'],
             'orderit' => $params['orderit'],
-            'reserve' => $params['reserve'],
+            'reserve' => $params['reserve']
         ));
-        
-        
-       
-        
-        //$tuote = new Tuote($attributes);
+    
         $errors = $tuote->errors();
         
         if(count($errors) == 0){
              $tuote->save();
              $id = $tuote->id;
-        $tuoteryhmat = $params['tuoteryhmat'];
+            $tuoteryhmat = $params['tuoteryhmat'];
         
-        foreach($tuoteryhmat as $tuoteryhma){
-            $tuote->createTuoteYhdiste($id, $tuoteryhma);
-        }
+            foreach($tuoteryhmat as $tuoteryhma){
+                $tuote->createTuoteYhdiste($id, $tuoteryhma);
+            }
              Redirect::to('/tuote/' . $tuote->id, array('message' => 'Uusi tuote on luotu'));
         } else {
             View::make('tuote/new.html', array('errors' => $errors));
-        }
-        
-       
+        }    
     }
     
     public static function create(){
@@ -68,11 +44,6 @@ class TuoteController extends BaseController{
     public static function show($id){
         $tuote = Tuote::find($id);
         View::make('tuote/show.html', array('tuote' => $tuote));
-    }
-    
-    public static function kimput(){
-        $tuotteet = Tuote::all();
-        View::make('tuote/listaKimput.html', array('tuotteet' => $tuotteet));
     }
     
     public static function edit($id){
@@ -95,7 +66,7 @@ class TuoteController extends BaseController{
             'orderit' => $params['orderit'],
             'reserve' => $params['reserve']
                 );
-        
+ 
         $tuote = new Tuote($attributes);
         $errors = $tuote->errors();
         
@@ -109,7 +80,6 @@ class TuoteController extends BaseController{
     
     public static function remove($id){
         self::check_logged_in();
-        //$tuote = new Tuote(array('id' => $id));
         $tuote = Tuote::remove($id);
         
         Redirect::to('/tuotteet', array('message' => 'Tuotteen poisto onnistui'));
@@ -117,8 +87,40 @@ class TuoteController extends BaseController{
     
     public static function tuoteryhmalista(){
         $tuoteryhmat = Tuoteryhma::all();
-        View::make('test.html', array('tuoteryhmat' => $tuoteryhmat));
+        View::make('tuote/tuoteryhmatlista.html', array('tuoteryhmat' => $tuoteryhmat));
     }
+    
+    //eri listauksia
+    public static function listSales(){
+        $tuotteet = Tuote::listSales();
+        View::make('tuote/listaValinnat.html', array('tuotteet' => $tuotteet));
+    }
+        
+    public static function kimput(){
+        $tuotteet = Tuote::listThings($id);
+        View::make('tuote/listaValinnat.html', array('tuotteet' => $tuotteet));
+    }
+    
+    public static function showRyhma($id){
+        $tuotteet = Tuote::listThings($id);
+        
+        View::make('tuote/listaValinnat.html', array('tuotteet' => $tuotteet));
+    }
+    /*
+    public static function setAttributes($params){
+        $attributes = array(
+            'id' => $id,
+            'fname' => $params['fname'],
+            'price' => $params['price'],
+            'sale' => $params['sale'],
+            'description' => $params['description'],
+            'orderit' => $params['orderit'],
+            'reserve' => $params['reserve']
+                );
+        return $attributes;
+    }
+     * 
+     */
     
 
 }

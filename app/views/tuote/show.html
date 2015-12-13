@@ -36,8 +36,10 @@
         <p>{{tuote.description}}</p>
     </div>
     <div>
-        <p><h2>Tuoteryhmä</h2></p>
-        <p></p>
+        <p><h2>Tuoteryhmät</h2></p>
+        {% for tuoteryhma in tuoteryhmat %}
+        <p>{{tuoteryhma.fname}}</p>
+        {% endfor %}
     </div>
     {% if user_logged_in %}
     <div>
