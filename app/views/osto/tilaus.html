@@ -26,7 +26,12 @@
     <div>    
         <p><b><h4>Tilaaja</h4></b></p>
         <p>{{tilaus.orderer}}</p>
-    </div> 
+    </div>
+<div>
+    <form method="post" action="{{base_path}}/tilaus/{{tilaus.orderid}}/remove" style="display: inline-block;">
+        <button type="submit" class="btn btn-danger">Peru tilaus</button>
+    </form>
+</div>
                 
 {% endblock %}
 

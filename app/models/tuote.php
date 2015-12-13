@@ -68,7 +68,7 @@ class Tuote extends BaseModel{
         //Kint::dump($row);
     }
     public function remove($id){
-        self::testiremove($id);
+        self::removeTuoteYhdiste($id);
         $query = DB::connection()->prepare('DELETE FROM Tuote WHERE id = :id');
         $query->execute(array('id' => $id));
     }
@@ -100,11 +100,6 @@ class Tuote extends BaseModel{
         $query->execute(array('product_id' => $product_id));
     }
     
-    public function testiremove($product_id){
-        $query = DB::connection()->prepare('DELETE FROM TuoteJaRyhmaYhdiste WHERE product_id = :product_id');
-        $query->execute(array('product_id' => $product_id));
-    }
-    
     public static function listSales(){
         $query = DB::connection()->prepare('SELECT * FROM Tuote WHERE sale > 0 ORDER BY fname');
         $query->execute();
@@ -127,11 +122,8 @@ class Tuote extends BaseModel{
     }
     
     public static function listThings($groupid){
-        //SELECT * FROM Tuoteryhmä WHERE groupid IN (SELECT * FROM TuoteJaRyhmaYhdiste WHERE product_id = :product_id
         $query = DB::connection()->prepare('SELECT * FROM Tuote WHERE EXISTS (SELECT * FROM TuoteJaRyhmaYhdiste AS y WHERE Tuote.id = y.product_id AND groupid = :groupid)');
-        //$query->execute(array('groupid' => $groupid));
         $query->execute(array('groupid' => $groupid));
-        //$query->execute(array('id' => $id));
         
         $rows = $query->fetchAll();
         $tuotteet = array();
@@ -150,6 +142,7 @@ class Tuote extends BaseModel{
         return $tuotteet;
     }
  
+    //validate metodit
     public function validate_name(){
         
         $errors = array();
@@ -159,11 +152,16 @@ class Tuote extends BaseModel{
         return $errors; 
          
     }
-    
-    //validate price ja sale
     public function validate_pricing_is_number(){
         $errors = array();
         if (!is_numeric($this->price) || (!is_numeric($this->sale))){
+            $errors[] ='Hinnan ja alennuksen oltava numeroita';
+        }
+        return $errors;
+    }
+    public function validate_description_not_too_long(){
+        $errors = array();
+        if (!is_numeric($this->sale) || (!is_numeric($this->sale))){
             $errors[] ='Hinnan ja alennuksen oltava numeroita';
         }
         return $errors;

@@ -61,14 +61,17 @@ $routes->post('/kayttaja/:userid/remove', 'check_logged_in', function($userid){
 });
 
 //Tilaukseen liittyvät
-$routes->get('/tuotteet/:id/tilaa', 'check_logged_in', function($id){
+$routes->get('/tuotteet/:orderid/tilaa', 'check_logged_in', function($id){
     OstoController::create($id);
 });
-$routes->post('/tuotteet/:id/tilaa', 'check_logged_in', function($id){
+$routes->post('/tuotteet/:orderid/tilaa', 'check_logged_in', function($id){
     OstoController::store($id);
 });
-$routes->get('/tilaus/:id', 'check_logged_in', function($id){
+$routes->get('/tilaus/:orderid', 'check_logged_in', function($id){
     OstoController::showTilaus($id);
+});
+$routes->post('/tilaus/:orderid/remove', 'check_logged_in', function($orderid){
+    OstoController::removeOrder($orderid);
 });
 
 //testi

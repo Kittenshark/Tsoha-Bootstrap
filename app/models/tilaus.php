@@ -46,6 +46,11 @@ class Tilaus extends BaseModel{
         $this->orderid = $row['orderid'];
     }
     
+    public function remove($orderid){
+        $query = DB::connection()->prepare('DELETE FROM Tilaus WHERE orderid = :orderid');
+        $query->execute(array('orderid' => $orderid));
+    }
+
     public static function  findyourorders(){
         $query = DB::connection()->prepare('SELECT * FROM Tilaus INNER JOIN Kayttaja ON tilaus.orderer = kayttaja.userid');
         $query->execute();

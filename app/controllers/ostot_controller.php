@@ -31,11 +31,11 @@ class OstoController extends BaseController{
         //$tuote = Tuote::find($id);
         $params = $_POST; 
         $tuote = Tuote::find($id);
-
+        $timestamp = date('Y-m-d G:i:s');
         $tilaus = new Tilaus(array(
             //'orderid' => $params['orderid'],
             'price' => $tuote->price,
-            //'orderday' => time(),
+            'orderday' => $timestamp,
             'arrivaladdress' => $params['arrivaladdress'],
             'billingaddress' => $params['billingaddress'],
             'product_id' => $tuote->id,
@@ -51,6 +51,14 @@ class OstoController extends BaseController{
         } else {
             View::make('tuote/new.html', array('errors' => $errors));
         }
+    }
+    
+    public static function removeOrder($orderid){
+        self::check_logged_in();
+        $tilaus = Tilaus::remove($orderid);
+        $id = $_SESSION['kayttaja'];
+        
+        Redirect::to('/kayttaja/'.$id, array('message' => 'Tilaus on peruttu'));
     }
     
     public static function showall(){
