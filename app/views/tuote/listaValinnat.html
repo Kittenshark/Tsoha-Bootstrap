@@ -8,7 +8,9 @@
                         <a href="{{base_path}}/tuote/{{tuote.id}}">{{tuote.fname}}</a>
                         <p>{{tuote.price}}</p>
                         <div id="alennus">
-                            <p>Alennuksessa -{{tuote.sale}}%!</p>    
+                            {% if tuote.sale > 0 %}
+                            <p>Alennuksessa -{{tuote.sale}}%!</p>
+                            {% endif %}
                         </div>
                     </td>
                 </tr>

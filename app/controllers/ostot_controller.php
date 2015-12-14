@@ -49,7 +49,7 @@ class OstoController extends BaseController{
              $tilaus->save();
              Redirect::to('/tilaus/' . $tilaus->orderid, array('message' => 'Tuote on tilattu'));
         } else {
-            View::make('tuote/new.html', array('errors' => $errors));
+            View::make('osto/createTilaus.html', array('errors' => $errors, 'params' => $params));
         }
     }
     
@@ -78,7 +78,8 @@ class OstoController extends BaseController{
         $errors = $tilaus->errors();
         
         if(count($errors) > 0){
-            View::make('osto/editTilaus.html', array('errors' => $errors, 'attributes' => $attributes));
+            $tilaus = Tilaus::find($orderid);
+            View::make('osto/editTilaus.html', array('errors' => $errors, 'attributes' => $attributes, 'tilaus' => $tilaus));
         } else {
             $tilaus->update();
             Redirect::to('/tilaus/' . $tilaus->orderid, array('message' => 'Tilauksen onnistunut muokkaus') );

@@ -47,22 +47,9 @@
             $_SESSION['kayttaja'] = $kayttaja->userid;
             Redirect::to('/kayttaja/' . $kayttaja->userid, array('message' => 'Uusi käyttäjätunnus on luotu'));
         } else {
-           Redirect::to('/kirjaudu', array('errors' => $errors));
-        }
-        
-        
-        //$errors = $kayttaja->errors();
-        
-        /*
-        if(count($errors) == 0){
-             $kayttaja->save();
-             Redirect::to('/kayttaja/' . $kayttaja->userid, array('message' => 'Uusi käyttäjätunnus on luotu'));
-        } else {
-            View::make('kirjaudu/rekisterointi.html', array('errors' => $errors));
-        }
-         * 
-         */
-        }
+           Redirect::to('/kayttaja/uusi', array('errors' => $errors));
+        }    
+    }
         
         public static function userCreate(){
         View::make('kirjaudu/rekisterointi.html');

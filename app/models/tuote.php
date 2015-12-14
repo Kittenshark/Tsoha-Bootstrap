@@ -5,7 +5,7 @@ class Tuote extends BaseModel{
     
     public function __construct($attributes){
         parent::__construct($attributes);$attributes;
-        $this->validators = array('validate_name', 'validate_pricing_is_number');
+        $this->validators = array('validate_pricing_is_number', 'validate_not_empty');
     }
     //'validate_price', 'validate_sale', 'validate_description'
     public static function all(){
@@ -139,15 +139,6 @@ class Tuote extends BaseModel{
     }
  
     //validate metodit
-    public function validate_name(){
-        
-        $errors = array();
-        if($this->fname== '' || $this->fname== null){
-            $errors[] ='Nimi ei saa olla tyhjä';
-        }
-        return $errors; 
-         
-    }
     public function validate_pricing_is_number(){
         $errors = array();
         if (!is_numeric($this->price) || (!is_numeric($this->sale))){
@@ -159,6 +150,14 @@ class Tuote extends BaseModel{
         $errors = array();
         if (!is_numeric($this->sale) || (!is_numeric($this->sale))){
             $errors[] ='Hinnan ja alennuksen oltava numeroita';
+        }
+        return $errors;
+    }
+    
+    public function validate_not_empty(){
+        $errors = array();
+        if ($this->description == null || $this->description == '' || $this->fname== '' || $this->fname== null){
+            $errors[] ='Täytä puuttuvat kentät';
         }
         return $errors;
     }

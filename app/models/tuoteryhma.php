@@ -3,7 +3,7 @@ class Tuoteryhma extends BaseModel{
     public $id, $fname, $description;
     public function __construct($attributes){
         parent::__construct($attributes);$attributes;
-        //$this->validators = array('validate_name', 'validate_pricing_is_number');
+        $this->validators = array('validate_name');
     }
     
     public static function all(){
@@ -55,5 +55,21 @@ class Tuoteryhma extends BaseModel{
         } else {
            return null; 
         }
+    }
+    
+    public function save(){
+        $query = DB::connection()->prepare('INSERT INTO Tuoteryhma (fname, description) VALUES (:fname, :description) RETURNING id');      
+        $query->execute(array('fname' => $this->fname, 'description' => $this->description));
+        $row = $query->fetch();
+        
+        $this->id = $row['id'];
+    }
+    
+    public function validate_name(){
+        $errors = array();
+        if ($this->description == null || $this->description == '' || $this->fname== '' || $this->fname== null){
+            $errors[] ='Täytä puuttuvat kentät';
+        }
+        return $errors;
     }
 }

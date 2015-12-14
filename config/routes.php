@@ -111,7 +111,14 @@ $routes->get('/admin', 'check_logged_in', function(){
 });
 
 //kayttajan tilaukset
-$routes->get('/kayttaja/:id/tilaukset', function($id){
+$routes->get('/kayttaja/:id/tilaukset', 'check_logged_in', function($id){
     OstoController::listuserorders($id);
 });
-    
+
+//uusi tuoteryhmä
+$routes->get('/newtuoteryhma', 'check_logged_in', function(){
+    TuoteController::createTuoteryhma();
+});
+$routes->post('/newtuoteryhma', 'check_logged_in', function(){
+    TuoteController::storeTuoteryhma();
+});

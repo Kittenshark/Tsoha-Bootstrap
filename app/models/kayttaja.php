@@ -5,7 +5,7 @@ class Kayttaja extends BaseModel{
     
     public function __construct($attributes){
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_password_length', 'validate_email', 'validate_username_not_taken', 'validate_real_name');
+        $this->validators = array('validate_name', 'validate_password', 'validate_email', 'validate_username_not_taken', 'validate_real_name');
     }
     
     //listataan kaikki käyttäjät
@@ -142,7 +142,7 @@ class Kayttaja extends BaseModel{
     
      * 
      */
-    public function validate_password_length(){
+    public function validate_password(){
         $errors = array();
         if(strlen($this->password) < 3 || $this->password == null || $this->password == ''){
             $errors[] ='Salasanan oltava vähintään 4 merkkiä';
@@ -167,6 +167,13 @@ class Kayttaja extends BaseModel{
         return $errors;
     }
     
+    public function validate_not_empty(){
+        $errors = array();
+        if ($this->password == null || $this->password == '' || $this->username== '' || $this->username== null){
+            $errors[] ='Täytä puuttuvat kentät';
+        }
+        return $errors;
+    }
 }
     
     
