@@ -10,14 +10,15 @@ class TuoteController extends BaseController{
         
         $params = $_POST;
         
-        $tuote = new Tuote(array(
+        $attributes = array(
             'fname' => $params['fname'],
             'price' => $params['price'],
             'sale' => $params['sale'],
             'description' => $params['description'],
             'orderit' => $params['orderit']
-        ));
+        );
     
+        $tuote = new Tuote($attributes);
         $errors = $tuote->errors();
         
         if(count($errors) == 0){
@@ -31,7 +32,7 @@ class TuoteController extends BaseController{
              Redirect::to('/tuote/' . $tuote->id, array('message' => 'Uusi tuote on luotu'));
         } else {
             $tuoteryhmat = Tuoteryhma::all();
-            View::make('tuote/new.html', array('errors' => $errors, '$params' => $params, 'tuoteryhmat' => $tuoteryhmat));
+            View::make('tuote/new.html', array('errors' => $errors, 'attributes' => $attributes, 'tuoteryhmat' => $tuoteryhmat));
         }    
     }
     
@@ -72,6 +73,7 @@ class TuoteController extends BaseController{
         if(count($errors) > 0){
             $tuote = Tuote::find($id);
             View::make('tuote/edit.html', array('errors' => $errors,'attributes' => $attributes, 'tuote' => $tuote));
+            //View::make('tuote/edit.html', array('errors' => $errors,'attributes' => $attributes));
         } else {
             $tuote->update();
             Redirect::to('/tuote/' . $tuote->id, array('message' => 'Onnistunut muokkaus') );
@@ -117,11 +119,12 @@ class TuoteController extends BaseController{
         
         $params = $_POST;
         
-        $tuoteryhma = new Tuoteryhma(array(
+        $attributes = array(
             'fname' => $params['fname'],
             'description' => $params['description']
-        ));
-    
+        );
+        
+        $tuoteryhma = new Tuoteryhma($attributes);
         $errors = $tuoteryhma->errors();
         
         if(count($errors) == 0){
@@ -129,7 +132,7 @@ class TuoteController extends BaseController{
             
             Redirect::to('/tuotteet', array('message' => 'Uusi tuoteryhmä on luotu'));
         } else {
-            View::make('tuote/newTuoteryhma.html', array('errors' => $errors, '$params' => $params));
+            View::make('tuote/newTuoteryhma.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
     

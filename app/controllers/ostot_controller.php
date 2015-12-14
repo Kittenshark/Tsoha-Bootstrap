@@ -28,20 +28,19 @@ class OstoController extends BaseController{
     
     public static function store($id){
         self::check_logged_in();
-        //$tuote = Tuote::find($id);
         $params = $_POST; 
         $tuote = Tuote::find($id);
         $timestamp = date('Y-m-d G:i:s');
-        $tilaus = new Tilaus(array(
-            //'orderid' => $params['orderid'],
+        $attributes = array(
             'price' => $tuote->price,
             'orderday' => $timestamp,
             'arrivaladdress' => $params['arrivaladdress'],
             'billingaddress' => $params['billingaddress'],
             'product_id' => $tuote->id,
             'orderer' => $_SESSION['kayttaja']
-        ));
+        );
         
+        $tilaus = new Tilaus($attributes);
         $errors = $tilaus->errors();
         
         
@@ -49,7 +48,7 @@ class OstoController extends BaseController{
              $tilaus->save();
              Redirect::to('/tilaus/' . $tilaus->orderid, array('message' => 'Tuote on tilattu'));
         } else {
-            View::make('osto/createTilaus.html', array('errors' => $errors, 'params' => $params));
+            View::make('osto/createTilaus.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
     

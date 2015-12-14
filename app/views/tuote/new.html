@@ -16,21 +16,21 @@
      <form method="post" action="{{base_path}}/tuote">
         <div class="form-group">
             <label>Nimi</label>
-            <input name="fname" class="form-control" type="text"/>
+            <input name="fname" class="form-control" type="text" value="{{attributes.fname}}"/>
         </div>
         
         <div class="form-group">
             <label>Hinta</label>
-            <input type="text" name="price" class="form-control"/>
+            <input type="text" name="price" class="form-control" value="{{attributes.price}}"/>
         </div>
         
         <div class="form-group">
             <label>Alennus</label>
-            <input type="text" name="sale" class="form-control"/>
+            <input type="text" name="sale" class="form-control" value="{{attributes.sale}}"/>
         </div>
         <div class="form-group">
             <label>Kuvaus</label>
-            <input type="text" name="description" class="form-control"/>
+            <input type="text" name="description" class="form-control" value="{{attributes.description}}"/>
         </div>
         <div class="form-group">
             <label>Tuoteryhmä</label>

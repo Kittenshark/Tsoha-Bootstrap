@@ -14,11 +14,11 @@
         <div class="form-group">
             <label>Nimi</label>
             <p>Nykyinen nimi: <b>{{tilaus.arrivaladdress}}</b></p>
-            <input type="text" name="arrivaladdress"/>
+            <input type="text" name="arrivaladdress" value="{{attributes.arrivaladdress}}"/>
         </div>
         <div class="form-group">
             <p>Nykyinen hinta: <b>{{tilaus.billingaddress}}</b></p>
-            <input type="text" name="billingaddress"/>
+            <input type="text" name="billingaddress" value="{{attributes.billingaddress}}"/>
         </div>
          <div>
              <input name="price" value="{{tilaus.price}}" type="hidden">
