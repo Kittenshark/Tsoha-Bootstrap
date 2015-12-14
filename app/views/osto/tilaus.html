@@ -28,6 +28,9 @@
         <p>{{tilaus.orderer}}</p>
     </div>
 <div>
+    <a class="btn btn-default" href="{{base_path}}/tilaus/{{tilaus.orderid}}/edit">Muuta osoitetietoja</a>
+</div>
+<div>
     <form method="post" action="{{base_path}}/tilaus/{{tilaus.orderid}}/remove" style="display: inline-block;">
         <button type="submit" class="btn btn-danger">Peru tilaus</button>
     </form>

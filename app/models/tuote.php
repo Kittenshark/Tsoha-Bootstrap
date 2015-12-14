@@ -22,8 +22,7 @@ class Tuote extends BaseModel{
                 'price' => $row['price'],
                 'sale' => $row['sale'],
                 'description' => $row['description'],
-                'orderit' => $row['orderit'],
-                'reserve' => $row['reserve']
+                'orderit' => $row['orderit']
             ));
         }
         return $tuotteet;
@@ -41,8 +40,7 @@ class Tuote extends BaseModel{
                 'price' => $row['price'],
                 'sale' => $row['sale'],
                 'description' => $row['description'],
-                'orderit' => $row['orderit'],
-                'reserve' => $row['reserve']
+                'orderit' => $row['orderit']
             ));
             return $tuote;
         } else {
@@ -51,8 +49,8 @@ class Tuote extends BaseModel{
     }
     
     public function save(){
-        $query = DB::connection()->prepare('INSERT INTO Tuote (fname, price, sale, description, orderit, reserve) VALUES (:fname, :price, :sale, :description, :orderit, :reserve) RETURNING id');      
-        $query->execute(array('fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'orderit' => $this->orderit, 'reserve' => $this->reserve));
+        $query = DB::connection()->prepare('INSERT INTO Tuote (fname, price, sale, description, orderit) VALUES (:fname, :price, :sale, :description, :orderit) RETURNING id');      
+        $query->execute(array('fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'orderit' => $this->orderit));
         $row = $query->fetch();
         
         //Kint::trace();
@@ -62,8 +60,8 @@ class Tuote extends BaseModel{
     }
     
     public function update(){
-        $query = DB::connection()->prepare('UPDATE Tuote SET fname = :fname, price = :price, sale = :sale, description = :description, orderit = :orderit, reserve = :reserve WHERE id = :id');
-        $query->execute(array('id' => $this->id, 'fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'orderit' => $this->orderit, 'reserve' => $this->reserve));
+        $query = DB::connection()->prepare('UPDATE Tuote SET fname = :fname, price = :price, sale = :sale, description = :description, orderit = :orderit WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'fname' => $this->fname, 'price' => $this->price, 'sale' => $this->sale, 'description' => $this->description, 'orderit' => $this->orderit));
         
         //Kint::dump($row);
     }
@@ -114,8 +112,7 @@ class Tuote extends BaseModel{
                 'price' => $row['price'],
                 'sale' => $row['sale'],
                 'description' => $row['description'],
-                'orderit' => $row['orderit'],
-                'reserve' => $row['reserve']
+                'orderit' => $row['orderit']
             ));
         }
         return $tuotteet;
@@ -135,8 +132,7 @@ class Tuote extends BaseModel{
                 'price' => $row['price'],
                 'sale' => $row['sale'],
                 'description' => $row['description'],
-                'orderit' => $row['orderit'],
-                'reserve' => $row['reserve']
+                'orderit' => $row['orderit']
             ));
         }
         return $tuotteet;

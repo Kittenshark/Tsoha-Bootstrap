@@ -73,6 +73,12 @@ $routes->get('/tilaus/:orderid', 'check_logged_in', function($id){
 $routes->post('/tilaus/:orderid/remove', 'check_logged_in', function($orderid){
     OstoController::removeOrder($orderid);
 });
+$routes->get('/tilaus/:orderid/edit', 'check_logged_in', function($orderid){
+    OstoController::edit($orderid);
+});
+$routes->post('/tilaus/:orderid/edit', 'check_logged_in', function($orderid){
+    OstoController::updateOrder($orderid);
+});
 
 //testi
 $routes->get('/testipalikka','check_logged_in', function(){

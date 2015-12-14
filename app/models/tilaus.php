@@ -46,6 +46,13 @@ class Tilaus extends BaseModel{
         $this->orderid = $row['orderid'];
     }
     
+    public function update(){
+        $query = DB::connection()->prepare('UPDATE Tilaus SET arrivaladdress = :arrivaladdress, billingaddress = :billingaddress, price = :price, orderday = :orderday, product_id = :product_id, orderer = :orderer WHERE orderid = :orderid');
+        $query->execute(array('orderid' => $this->orderid, 'arrivaladdress' => $this->arrivaladdress, 'billingaddress' => $this->billingaddress, 'price' => $this->price, 'orderday' => $this->orderday, 'product_id' => $this->product_id, 'orderer' => $this->orderer));
+        
+        //Kint::dump($row);
+    }
+    
     public function remove($orderid){
         $query = DB::connection()->prepare('DELETE FROM Tilaus WHERE orderid = :orderid');
         $query->execute(array('orderid' => $orderid));

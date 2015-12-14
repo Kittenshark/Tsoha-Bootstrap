@@ -19,8 +19,7 @@ CREATE TABLE Tuote(
     price DECIMAL NOT NULL,
     sale DECIMAL,
     description varchar(200),
-    orderIt boolean DEFAULT FALSE,
-    reserve boolean DEFAULT FALSE
+    orderIt boolean DEFAULT FALSE
 );
 
 CREATE TABLE TuoteJaRyhmaYhdiste(
@@ -35,16 +34,6 @@ CREATE TABLE Tilaus(
     orderDay TIMESTAMP,
     arrivalAddress varchar(70),
     billingAddress varchar(70),
-    product_id INTEGER REFERENCES Tuote(id),
-    orderer INTEGER REFERENCES Kayttaja(userid)
-);
-
-CREATE TABLE Varaus(
-    reserveId SERIAL PRIMARY KEY,
-    price decimal NOT NULL,
-    wayOfPayment varchar(50) NOT NULL,
-    orderDay TIMESTAMP,
-    collectDay TIMESTAMP,
     product_id INTEGER REFERENCES Tuote(id),
     orderer INTEGER REFERENCES Kayttaja(userid)
 );

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+     <form method="post" action="{{base_path}}/tilaus/{{tilaus.orderid}}/edit">
+        <div class="form-group">
+            <label>Nimi</label>
+            <p>Nykyinen nimi: <b>{{tilaus.arrivaladdress}}</b></p>
+            <input type="text" name="arrivaladdress"/>
+        </div>
+        <div class="form-group">
+            <p>Nykyinen hinta: <b>{{tilaus.billingaddress}}</b></p>
+            <input type="text" name="billingaddress"/>
+        </div>
+         <div>
+             <input name="price" value="{{tilaus.price}}" type="hidden">
+             <input name="orderday" value="{{tilaus.orderday}}" type="hidden">
+             <input name="product_id" value="{{tilaus.product_id}}" type="hidden">
+             <input name="orderer" value="{{tilaus.orderer}}" type="hidden">
+         </div>   
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Tallenna</button>
+        </div> 
+    </form>
+        
+{% endblock %}

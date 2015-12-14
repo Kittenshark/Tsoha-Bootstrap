@@ -15,8 +15,7 @@ class TuoteController extends BaseController{
             'price' => $params['price'],
             'sale' => $params['sale'],
             'description' => $params['description'],
-            'orderit' => $params['orderit'],
-            'reserve' => $params['reserve']
+            'orderit' => $params['orderit']
         ));
     
         $errors = $tuote->errors();
@@ -63,8 +62,7 @@ class TuoteController extends BaseController{
             'price' => $params['price'],
             'sale' => $params['sale'],
             'description' => $params['description'],
-            'orderit' => $params['orderit'],
-            'reserve' => $params['reserve']
+            'orderit' => $params['orderit']
                 );
  
         $tuote = new Tuote($attributes);
@@ -114,8 +112,7 @@ class TuoteController extends BaseController{
             'price' => $params['price'],
             'sale' => $params['sale'],
             'description' => $params['description'],
-            'orderit' => $params['orderit'],
-            'reserve' => $params['reserve']
+            'orderit' => $params['orderit']
                 );
         return $attributes;
     }

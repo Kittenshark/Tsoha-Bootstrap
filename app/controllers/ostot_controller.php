@@ -53,6 +53,38 @@ class OstoController extends BaseController{
         }
     }
     
+    public static function edit($orderid){
+        self::check_logged_in();
+        $tilaus = Tilaus::find($orderid);
+        View::make('osto/editTilaus.html', array('tilaus' => $tilaus));
+    }
+    
+    public static function updateOrder($orderid){
+        self::check_logged_in();
+        
+        $params = $_POST;
+        
+        $attributes = array(
+            'orderid' => $orderid,
+            'arrivaladdress' => $params['arrivaladdress'],
+            'billingaddress' => $params['billingaddress'],
+            'price' => $params['price'],
+            'orderday' => $params['orderday'],
+            'product_id' => $params['product_id'],
+            'orderer' => $params['orderer']
+                );
+ 
+        $tilaus = new Tilaus($attributes);
+        $errors = $tilaus->errors();
+        
+        if(count($errors) > 0){
+            View::make('osto/editTilaus.html', array('errors' => $errors, 'attributes' => $attributes));
+        } else {
+            $tilaus->update();
+            Redirect::to('/tilaus/' . $tilaus->orderid, array('message' => 'Tilauksen onnistunut muokkaus') );
+        }
+    }
+    
     public static function removeOrder($orderid){
         self::check_logged_in();
         $tilaus = Tilaus::remove($orderid);

@@ -48,11 +48,6 @@
         {% else %}
         <button class="btn btn-danger disabled">Tilaa tuote</button>
         {% endif %}
-        {% if tuote.reserve %}
-        <button type="submit" class="btn btn-primary active">Varaa tuote</button>
-        {% else %}
-        <button class="btn btn-danger disabled">Varaa tuote</button>
-        {% endif %}
     </div>  
     <div>
         <a href="{{base_path}}/tuote/{{tuote.id}}/edit"><p>Muokkaa</p></a>
