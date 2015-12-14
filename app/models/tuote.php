@@ -70,17 +70,20 @@ class Tuote extends BaseModel{
         $query = DB::connection()->prepare('DELETE FROM Tuote WHERE id = :id');
         $query->execute(array('id' => $id));
     }
-    //$this->id
-    
-    public function getTuoteryhmat(){
+    //tuotteen tuoteryhmät
+    public function getTuoteryhmat($id){
         $tuoteryhmat = array();
-        $query = DB::connection()->prepare('SELECT * FROM Tuoteryhmä WHERE groupid IN (SELECT * FROM TuoteJaRyhmaYhdiste WHERE product_id = :product_id');
-        $query->execute(array('product_id' => $this->product_id));
-        $row = $query->fetchAll();
+        $query = DB::connection()->prepare('SELECT * FROM Tuoteryhma WHERE EXISTS (SELECT * FROM TuoteJaRyhmaYhdiste AS y WHERE Tuoteryhma.id = y.groupid AND y.product_id = :id)');
+        //$query = DB::connection()->prepare('SELECT * FROM Tuote WHERE EXISTS (SELECT * FROM TuoteJaRyhmaYhdiste AS y WHERE Tuote.id = y.product_id AND groupid = :groupid)');
+       
+        //Tuote.id = y.product_id AND groupid = :groupid
+        //$query->execute(array('groupid' => $groupid));
+        $query->execute(array('id' => $id));
+        $rows = $query->fetchAll();
         
         foreach ($rows as $row) {
             $tuoteryhmat[] = new Tuoteryhma(array(
-                'groupid' => $row['groupid'],
+                'id' => $row['id'],
                 'fname' => $row['fname'],
                 'description' => $row['description']
             ));
@@ -117,7 +120,7 @@ class Tuote extends BaseModel{
         }
         return $tuotteet;
     }
-    
+    //halutun tuoteryhman tuotteiden listaus
     public static function listThings($groupid){
         $query = DB::connection()->prepare('SELECT * FROM Tuote WHERE EXISTS (SELECT * FROM TuoteJaRyhmaYhdiste AS y WHERE Tuote.id = y.product_id AND groupid = :groupid)');
         $query->execute(array('groupid' => $groupid));

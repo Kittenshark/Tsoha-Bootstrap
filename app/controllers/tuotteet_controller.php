@@ -44,7 +44,8 @@ class TuoteController extends BaseController{
     
     public static function show($id){
         $tuote = Tuote::find($id);
-        View::make('tuote/show.html', array('tuote' => $tuote));
+        $tuoteryhmät = Tuote::getTuoteryhmat($id);
+        View::make('tuote/show.html', array('tuote' => $tuote, 'tuoteryhmat' => $tuoteryhmät));
     }
     
     public static function edit($id){
@@ -73,7 +74,6 @@ class TuoteController extends BaseController{
         if(count($errors) > 0){
             $tuote = Tuote::find($id);
             View::make('tuote/edit.html', array('errors' => $errors,'attributes' => $attributes, 'tuote' => $tuote));
-            //View::make('tuote/edit.html', array('errors' => $errors,'attributes' => $attributes));
         } else {
             $tuote->update();
             Redirect::to('/tuote/' . $tuote->id, array('message' => 'Onnistunut muokkaus') );
