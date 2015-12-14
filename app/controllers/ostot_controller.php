@@ -31,8 +31,11 @@ class OstoController extends BaseController{
         $params = $_POST; 
         $tuote = Tuote::find($id);
         $timestamp = date('Y-m-d G:i:s');
+        $alennushinnassa = $tuote->price * (1 - ($tuote->sale)/100);
+        
         $attributes = array(
-            'price' => $tuote->price,
+            //'price' => $tuote->price,
+            'price' => $alennushinnassa,
             'orderday' => $timestamp,
             'arrivaladdress' => $params['arrivaladdress'],
             'billingaddress' => $params['billingaddress'],

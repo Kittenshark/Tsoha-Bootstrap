@@ -107,12 +107,6 @@ class Kayttaja extends BaseModel{
     }
     
     public function validate_name(){
-        /*
-        $errors = array();
-        $errors = $this->check_empty($this->username, $errors);
-        /*
-        BaseModel::string_not_null();
-*/
         $errors = array();
         if($this->username== '' || $this->username== null){
             $errors[] ='Käyttäjätunnus puuttuu';
@@ -131,17 +125,7 @@ class Kayttaja extends BaseModel{
         
         return $errors;
     }
-    /*
-    public function check_empty($param, $errors){
-        if($param == '' || $param == null){
-            $errors[] ='Jotakin puuttuu';
-            //tarkennus mitä puuttuu tulossa
-        }
-        return $errors;
-    }
-    
-     * 
-     */
+
     public function validate_password(){
         $errors = array();
         if(strlen($this->password) < 3 || $this->password == null || $this->password == ''){

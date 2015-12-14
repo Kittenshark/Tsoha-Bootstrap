@@ -74,10 +74,6 @@ class Tuote extends BaseModel{
     public function getTuoteryhmat($id){
         $tuoteryhmat = array();
         $query = DB::connection()->prepare('SELECT * FROM Tuoteryhma WHERE EXISTS (SELECT * FROM TuoteJaRyhmaYhdiste AS y WHERE Tuoteryhma.id = y.groupid AND y.product_id = :id)');
-        //$query = DB::connection()->prepare('SELECT * FROM Tuote WHERE EXISTS (SELECT * FROM TuoteJaRyhmaYhdiste AS y WHERE Tuote.id = y.product_id AND groupid = :groupid)');
-       
-        //Tuote.id = y.product_id AND groupid = :groupid
-        //$query->execute(array('groupid' => $groupid));
         $query->execute(array('id' => $id));
         $rows = $query->fetchAll();
         
